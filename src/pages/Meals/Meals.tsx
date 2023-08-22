@@ -1,7 +1,9 @@
+import Header from '../../Components/Header';
+
 function Meals() {
   return (
     <div>
-      <h1>Meals</h1>
+      <Header />
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isValidUser, setIsValidUser] = useState(true);
@@ -19,10 +21,21 @@ function Login() {
     setIsValidUser(!emailIsValid(email) || value.length < 7);
   };
 
-  const formIsValid = () => isValidUser === true;
+  const formIsValid = isValidUser === true;
+
+  const handleSubmit = () => {
+    /*  if (formIsValid) */
+    localStorage.setItem('user', JSON.stringify({ email: `${email}` }));
+    history.push('/home');
+
+    /* history.push('/home'); */
+    /*   setEmail('');
+      setPassword('');
+      setIsValidUser(false); */
+  };
 
   return (
-    <div className="meals">
+    <form className="meals">
       <input
         type="email"
         data-testid="email-input"
@@ -40,12 +53,12 @@ function Login() {
       <button
         type="button"
         data-testid="login-submit-btn"
-        // onClick={ }
-        disabled={ formIsValid() }
+        onClick={ handleSubmit }
+        disabled={ formIsValid }
       >
         Enter
       </button>
-    </div>
+    </form>
   );
 }
 

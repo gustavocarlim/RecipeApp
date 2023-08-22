@@ -35,7 +35,7 @@ describe('Verifica o componente <Login />', () => {
     expect(button).toBeDisabled();
   });
 
-  test('Verifica se o botão de "Entrar" está desabilitado ao inserir um email inválido', async () => {
+  test('Verifica se o botão de "Enter" está desabilitado ao inserir um email inválido', async () => {
     render(<Login />);
 
     const validEmail = 'fulanodetal@testecom';

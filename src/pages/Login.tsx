@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isValidUser, setIsValidUser] = useState(true);
@@ -12,7 +12,7 @@ function Login() {
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setEmail(value);
-    setIsValidUser(!emailIsValid(value));
+    setIsValidUser(!emailIsValid(value) || password.length < 7);
   };
 
   const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,14 +24,8 @@ function Login() {
   const formIsValid = isValidUser === true;
 
   const handleSubmit = () => {
-    /*  if (formIsValid) */
     localStorage.setItem('user', JSON.stringify({ email: `${email}` }));
-    history.push('/home');
-
-    /* history.push('/home'); */
-    /*   setEmail('');
-      setPassword('');
-      setIsValidUser(false); */
+    navigate('/meals');
   };
 
   return (

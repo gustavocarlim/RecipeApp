@@ -58,4 +58,19 @@ describe('Verifica o componente <Login />', () => {
     await userEvent.type(screen.getByTestId(password), validPassword);
     expect(screen.getByRole('button', { name: /enter/i })).toBeEnabled();
   });
+
+  test('Verifica se é direcionado para /meals ao clicar no botão', async () => {
+    render(<Login />);
+
+    const validEmail = 'chris&greg@teste.com';
+    const validPassword = '1234567';
+
+    await userEvent.type(screen.getByTestId(email), validEmail);
+    await userEvent.type(screen.getByTestId(password), validPassword);
+
+    const btnLogin = screen.getByRole('button', { name: /enter/i });
+    expect(btnLogin).toBeInTheDocument();
+    await userEvent.click(btnLogin);
+    expect(window.location.pathname).toBe('/meals');
+  });
 });

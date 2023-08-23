@@ -1,73 +1,83 @@
-// import React from 'react';
-// import userEvent from '@testing-library/user-event';
-// import { render, screen } from '@testing-library/react';
-// import Header from '../Components/Header';
+import { MemoryRouter, useNavigate } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
+import Header from '../Components/Header';
+import RecipiesProvider from '../context/RecipiesProvider';
 
-// describe('Verifica o componente <Header />', () => {
-//   test('Verifica se existe um campo com ícone de perfil', () => {
-//     render(<Header />);
+describe('Verifica o componente <Header />', () => {
+  test('Verifica se existe um título', () => {
+    render(
+      <MemoryRouter>
+        <RecipiesProvider>
+          <Header />
+        </RecipiesProvider>
+      </MemoryRouter>,
+    );
 
-//     const emailInput = screen.getByTestId('profile-top-btn');
-//     expect(emailInput).toBeInTheDocument();
-//   });
+    const title = screen.getByTestId('page-title');
+    expect(title).toBeInTheDocument();
+  });
 
-//   //   test('Verifica se existe um campo senha', () => {
-//   //     render(<Login />);
+  test('Verifica se existe um ícone de perfil', () => {
+    render(
+      <MemoryRouter>
+        <RecipiesProvider>
+          <Header />
+        </RecipiesProvider>
+      </MemoryRouter>,
+    );
 
-//   //     const passwordInput = screen.getByTestId(password);
-//   //     expect(passwordInput).toBeInTheDocument();
-//   //   });
+    const iconProfile = screen.getByTestId('profile-top-btn');
+    expect(iconProfile).toBeInTheDocument();
+  });
 
-//   //   test('Verifica se existe um botão de Enter', () => {
-//   //     render(<Login />);
+  test('Verifica se existe um ícone de pesquisa', () => {
+    render(
+      <MemoryRouter>
+        <RecipiesProvider>
+          <Header />
+        </RecipiesProvider>
+      </MemoryRouter>,
+    );
 
-//   //     const button = screen.getByTestId('login-submit-btn');
-//   //     expect(button).toBeInTheDocument();
-//   //   });
+    const iconSearch = screen.getByTestId('search-top-btn');
+    expect(iconSearch).toBeInTheDocument();
+  });
 
-//   //   test('Verifica se o botão está desabilitado', () => {
-//   //     render(<Login />);
+  test('Verifica se a entrada de pesquisa é alternada ao clicar no botão de pesquisa', () => {
+    render(
+      <MemoryRouter>
+        <RecipiesProvider>
+          <Header />
+        </RecipiesProvider>
+      </MemoryRouter>,
+    );
 
-//   //     const button = screen.getByTestId('login-submit-btn');
-//   //     expect(button).toBeDisabled();
-//   //   });
+    const searchInput = screen.queryByTestId('search-input');
+    const buttonSearch = screen.getByTestId('search-top-btn');
 
-//   //   test('Verifica se o botão de "Enter" está desabilitado ao inserir um email inválido', async () => {
-//   //     render(<Login />);
+    expect(searchInput).not.toBeInTheDocument();
 
-//   //     const validEmail = 'fulanodetal@testecom';
-//   //     const validPassword = '2000';
+    userEvent.click(buttonSearch);
+    expect(screen.queryByPlaceholderText('Search')).toBeInTheDocument();
 
-//   //     expect(screen.getByRole('button', { name: /enter/i })).toBeDisabled();
-//   //     await userEvent.type(screen.getByTestId(email), validEmail);
-//   //     await userEvent.type(screen.getByTestId(password), validPassword);
-//   //     expect(screen.getByRole('button', { name: /enter/i })).toBeDisabled();
-//   //   });
+    userEvent.click(buttonSearch);
+    expect(searchInput).not.toBeInTheDocument();
+  });
 
-//   //   test('Verifica se o botão está habilitado após inserir email e senha', async () => {
-//   //     render(<Login />);
+  // test('Verifica se ao clicar no ícone de perfil, a página é redirecionada', () => {
+  //   render(
+  //     <MemoryRouter>
+  //       <RecipiesProvider>
+  //         <Header />
+  //       </RecipiesProvider>
+  //     </MemoryRouter>,
+  //   );
 
-//   //     const validEmail = 'chris&greg@teste.com';
-//   //     const validPassword = '3146789';
+  //   const navigate = useNavigate();
+  //   const buttonProfile = screen.getByTestId('profile-top-btn');
 
-//   //     expect(screen.getByRole('button', { name: /enter/i })).toBeDisabled();
-//   //     await userEvent.type(screen.getByTestId(email), validEmail);
-//   //     await userEvent.type(screen.getByTestId(password), validPassword);
-//   //     expect(screen.getByRole('button', { name: /enter/i })).toBeEnabled();
-//   //   });
-
-//   //   test('Verifica se é direcionado para /meals ao clicar no botão', async () => {
-//   //     render(<Login />);
-
-//   //     const validEmail = 'chris&greg@teste.com';
-//   //     const validPassword = '1234567';
-
-//   //     await userEvent.type(screen.getByTestId(email), validEmail);
-//   //     await userEvent.type(screen.getByTestId(password), validPassword);
-
-// //     const btnLogin = screen.getByRole('button', { name: /enter/i });
-// //     expect(btnLogin).toBeInTheDocument();
-// //     await userEvent.click(btnLogin);
-// //     expect(window.location.pathname).toBe('/meals');
-// //   });
-// });
+  //   userEvent.click(buttonProfile);
+  //   expect(navigate).toHaveBeenCalledWith('/profile');
+  // });
+});

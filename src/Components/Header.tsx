@@ -27,6 +27,7 @@ function Header() {
         <img
           src="src/images/searchIcon.svg"
           alt="Search"
+          placeholder="Search"
           data-testid="search-top-btn"
         />
       </button>

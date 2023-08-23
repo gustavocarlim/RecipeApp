@@ -1,4 +1,4 @@
-function DoneRecipes() {
+function DoneRecipies() {
   return (
     <div>
       <div>
@@ -13,4 +13,4 @@ function DoneRecipes() {
   );
 }
 
-export default DoneRecipes;
+export default DoneRecipies;

@@ -1,17 +1,17 @@
 import { screen } from '@testing-library/react';
-import Profile from '../pages/Profile/Profile';
+import FavoriteRecipes from '../pages/FavoriteRecipes/favoriteRecipes';
 import { renderWithRouter } from './helpers/renderWithRouter';
 
-describe('Verifica o componente Profile', () => {
+describe('Verifica o componente FavoriteRecipes', () => {
   test('Verifica se existe um título', () => {
-    renderWithRouter(<Profile />, { initialEntries: ['/'] });
+    renderWithRouter(<FavoriteRecipes />, { initialEntries: ['/'] });
 
     const title = screen.getByTestId('page-title');
     expect(title).toBeInTheDocument();
   });
 
   test('verifica se existe um ícone de perfil', () => {
-    renderWithRouter(<Profile />, { initialEntries: ['/'] });
+    renderWithRouter(<FavoriteRecipes />, { initialEntries: ['/'] });
 
     const iconProfile = screen.getByTestId('profile-top-btn');
     expect(iconProfile).toBeInTheDocument();

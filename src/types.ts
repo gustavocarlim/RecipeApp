@@ -1,7 +1,7 @@
-export type RecipiesConxtextType = {
+export type RecipesConxtextType = {
   user?: User | null;
-  recipies: RecipiesType[];
-  setRecipies: React.Dispatch<React.SetStateAction<RecipiesType[]>>;
+  recipes: RecipesType[];
+  setRecipes: React.Dispatch<React.SetStateAction<RecipesType[]>>;
 };
 
 export type User = {
@@ -22,7 +22,7 @@ export type Drinks = {
   strDrinkThumb: string;
 };
 
-export type RecipiesType = {
+export type RecipesType = {
   meals: Meals[];
   drinks: Drinks[];
 };

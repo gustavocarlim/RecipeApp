@@ -5,13 +5,13 @@ import Login from './pages/Login/Login';
 import Meals from './pages/Meals/Meals';
 import Drinks from './pages/Drinks/Drinks';
 import Profile from './pages/Profile/Profile';
-import DoneRecipes from './pages/DoneRecipes/doneRecipies';
-import FavoriteRecipes from './pages/FavoriteRecipies/favoriteRecipies';
-import RecipiesProvider from './context/RecipiesProvider';
+import DoneRecipes from './pages/DoneRecipes/doneRecipes';
+import FavoriteRecipes from './pages/FavoriteRecipes/favoriteRecipes';
+import RecipesProvider from './context/RecipesProvider';
 
 function App() {
   return (
-    <RecipiesProvider>
+    <RecipesProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={ <Login /> } />
@@ -22,7 +22,7 @@ function App() {
           <Route path="/favorite-recipes" element={ <FavoriteRecipes /> } />
         </Routes>
       </BrowserRouter>
-    </RecipiesProvider>
+    </RecipesProvider>
   );
 }
 

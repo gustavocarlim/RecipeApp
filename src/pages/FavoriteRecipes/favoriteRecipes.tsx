@@ -1,4 +1,4 @@
-function FavoriteRecipies() {
+function FavoriteRecipes() {
   return (
     <div>
       <div>
@@ -7,10 +7,10 @@ function FavoriteRecipies() {
           alt="Profile"
           data-testid="profile-top-btn"
         />
-        <h1 data-testid="page-title">Favorite Recipies</h1>
+        <h1 data-testid="page-title">Favorite Recipes</h1>
       </div>
     </div>
   );
 }
 
-export default FavoriteRecipies;
+export default FavoriteRecipes;

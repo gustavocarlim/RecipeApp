@@ -5,6 +5,7 @@ function Header() {
   const [button, setButton] = useState(false);
 
   const navigate = useNavigate();
+
   const handleButton = () => {
     navigate('/profile');
   };

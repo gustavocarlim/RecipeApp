@@ -2,6 +2,8 @@ export type RecipiesConxtextType = {
   user?: User | null;
   recipies: RecipiesType[];
   setRecipies: React.Dispatch<React.SetStateAction<RecipiesType[]>>;
+  filter: string;
+  setFilter: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type User = {

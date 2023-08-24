@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import RecipiesContext from '../context/RecipesContext';
 
 function Header() {
   const [button, setButton] = useState(false);
+  const { filter, setFilter } = useContext(RecipiesContext);
 
   const navigate = useNavigate();
   const handleButton = () => {
@@ -31,7 +33,14 @@ function Header() {
           data-testid="search-top-btn"
         />
       </button>
-      {button ? <input data-testid="search-input" type="text" name="" id="" /> : null}
+      {button ? <input
+        onChange={ (e) => setFilter(e.target.value) }
+        value={ filter }
+        data-testid="search-input"
+        type="text"
+        name=""
+        id=""
+      /> : null}
       <h1 data-testid="page-title">Meals</h1>
     </div>
 

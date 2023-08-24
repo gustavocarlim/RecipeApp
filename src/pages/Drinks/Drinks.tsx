@@ -6,8 +6,26 @@ interface Drink {
   imageUrl: string;
   name: string;
 }
+
 function Drinks() {
   const [drinks, setDrinks] = useState<Drink[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const fetchCategories = async () => {
+    let url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+
+    if (selectedCategory) {
+      url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+    }
+
+    const response = await fetch(url);
+    const data = await response.json();
+    const categoryData = data.drinks ? data.drinks.map(
+      (category: any) => category.strCategory,
+    ) : [];
+    setCategories(categoryData.slice(0, 5));
+  };
 
   const fetchDrinks = async () => {
     const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
@@ -20,9 +38,37 @@ function Drinks() {
     setDrinks(drinkData);
   };
 
+  const fetchDrinksByCategory = async (category: string) => {
+    try {
+      const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      const drinkData = data.drinks.map((drink: any) => ({
+        id: drink.idDrink,
+        imageUrl: drink.strDrinkThumb,
+        name: drink.strDrink,
+      }));
+      setDrinks(drinkData.slice(0, 12));
+    } catch (error) {
+      console.error('Error fetching drinks:', error);
+    }
+  };
+
   useEffect(() => {
     fetchDrinks();
-  }, []);
+    fetchCategories();
+    fetchDrinksByCategory(selectedCategory || '');
+  }, [selectedCategory]);
+
+  const handleCategoryFilter = (category: string) => {
+    setSelectedCategory(category);
+  };
+
+  const handleClearFilters = () => {
+    setSelectedCategory(null);
+  };
 
   const drinksToRender = drinks.slice(0, 12);
 
@@ -40,6 +86,18 @@ function Drinks() {
           data-testid="search-top-btn"
         />
         <h1 data-testid="page-title">Drinks</h1>
+        {categories.map((category, index) => (
+          <button
+            key={ index }
+            onClick={ () => handleCategoryFilter(category) }
+            data-testid={ `${category}-category-filter` }
+          >
+            {category}
+          </button>
+        ))}
+        <button onClick={ handleClearFilters } data-testid="All-category-filter">
+          Clear Filters
+        </button>
         {drinksToRender.map((drink, index) => (
           <RecipeCard
             key={ drink.id }

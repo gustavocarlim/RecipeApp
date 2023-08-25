@@ -1,5 +1,5 @@
-import Footer from '../../Components/Footer';
 import { useEffect, useState } from 'react';
+import Footer from '../../Components/Footer';
 import RecipeCard from '../../Components/RecipeCard';
 
 interface Drink {
@@ -96,7 +96,7 @@ function Drinks() {
         </div>
       </div>
       <div>
-        
+
         <Footer />
 
         <img

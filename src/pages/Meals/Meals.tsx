@@ -89,40 +89,40 @@ function Meals() {
 
   return (
     <>
-    <div>
-      <Header />
-      {categories.map((category, index) => (
-        <button
-          key={ index }
-          onClick={ () => handleCategoryFilter(category) }
-          data-testid={ `${category}-category-filter` }
-        >
-          {category}
+      <div>
+        <Header />
+        {categories.map((category, index) => (
+          <button
+            key={ index }
+            onClick={ () => handleCategoryFilter(category) }
+            data-testid={ `${category}-category-filter` }
+          >
+            {category}
+          </button>
+        ))}
+        <button onClick={ handleClearFilters } data-testid="All-category-filter">
+          Clear Filters
         </button>
-      ))}
-      <button onClick={ handleClearFilters } data-testid="All-category-filter">
-        Clear Filters
-      </button>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        recipesToRender.map((recipe, index) => (
-          <RecipeCard
-            key={ recipe.id }
-            id={ recipe.id }
-            index={ index }
-            imageUrl={ recipe.imageUrl }
-            name={ recipe.name }
-            data-testid="recipe-card"
-            isDrinks={ false }
-          />
-        ))
-      )}
-    </div>
-    <div>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          recipesToRender.map((recipe, index) => (
+            <RecipeCard
+              key={ recipe.id }
+              id={ recipe.id }
+              index={ index }
+              imageUrl={ recipe.imageUrl }
+              name={ recipe.name }
+              data-testid="recipe-card"
+              isDrinks={ false }
+            />
+          ))
+        )}
+      </div>
+      <div>
         <Footer />
-    </div>
-  </>
+      </div>
+    </>
   );
 }
 

@@ -18,4 +18,3 @@ function Footer() {
 }
 
 export default Footer;
-// commirte pra corrigir o merge//

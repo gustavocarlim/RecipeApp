@@ -1,6 +1,6 @@
 import { createContext } from 'react';
-import { RecipiesConxtextType } from '../types';
+import { RecipesConxtextType } from '../types';
 
-const RecipiesContext = createContext({} as RecipiesConxtextType);
+const RecipesContext = createContext({} as RecipesConxtextType);
 /* const RecipiesContext = createContext({} as RecipiesConxtextType | null); */
-export default RecipiesContext;
+export default RecipesContext;

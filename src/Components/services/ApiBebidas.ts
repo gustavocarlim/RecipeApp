@@ -3,6 +3,7 @@ export const fetchIngredientsBebida = async (ingredient: string) => {
   const data = await response.json();
   return data;
 };
+
 export const fetchNameBebida = async (name: string) => {
   const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`);
   const data = await response.json();

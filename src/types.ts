@@ -1,9 +1,10 @@
-export type RecipiesConxtextType = {
+export type RecipesConxtextType = {
   user?: User | null;
-  recipies: RecipiesType[];
-  setRecipies: React.Dispatch<React.SetStateAction<RecipiesType[]>>;
+  recipes: RecipesType[];
+  setRecipies: React.Dispatch<React.SetStateAction<RecipesType[]>>;
   filter: string;
   setFilter: React.Dispatch<React.SetStateAction<string>>;
+
 };
 
 export type User = {
@@ -24,7 +25,7 @@ export type Drinks = {
   strDrinkThumb: string;
 };
 
-export type RecipiesType = {
+export type RecipesType = {
   meals: Meals[];
   drinks: Drinks[];
 };

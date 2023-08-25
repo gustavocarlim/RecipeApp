@@ -4,6 +4,7 @@ import RecipiesContext from '../context/RecipesContext';
 import { fetchIngredients, fetchName, fetchfirstLetter } from './services/Api';
 import { fetchIngredientsBebida, fetchNameBebida,
   fetchfirstLetterBebida } from './services/ApiBebidas';
+import Header from './Header';
 
 function SearchBar() {
   const [radio, setRadio] = useState('');
@@ -97,7 +98,7 @@ function SearchBar() {
           Pesquisar
         </button>
       </div>
-
+    
     </>
   );
 }

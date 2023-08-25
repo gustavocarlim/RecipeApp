@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { RecipiesType } from '../types';
+import { RecipesType } from '../types';
 import RecipiesContext from './RecipesContext';
 
 function RecipiesProvider({ children }: { children: React.ReactNode }) {
-  const [recipies, setRecipies] = useState<RecipiesType[]>([]);
+  const [recipies, setRecipies] = useState<RecipesType[]>([]);
   const [filter, setFilter] = useState('');
 
   return (

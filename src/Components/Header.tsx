@@ -1,12 +1,13 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import RecipiesContext from '../context/RecipesContext';
+import RecipesContext from '../context/RecipesContext';
 
 function Header() {
   const [button, setButton] = useState(false);
-  const { filter, setFilter } = useContext(RecipiesContext);
+  const { filter, setFilter } = useContext(RecipesContext);
 
   const navigate = useNavigate();
+
   const handleButton = () => {
     navigate('/profile');
   };

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Footer from '../../Components/Footer';
 import RecipeCard from '../../Components/RecipeCard';
 
 interface Drink {
@@ -78,8 +79,26 @@ function Drinks() {
   const drinksToRender = drinks.slice(0, 12);
 
   return (
-    <div>
+    <>
       <div>
+        <div>
+          <img
+            src="src/images/profileIcon.svg"
+            alt="Profile"
+            data-testid="profile-top-btn"
+          />
+          <img
+            src="src/images/searchIcon.svg"
+            alt="Search"
+            data-testid="search-top-btn"
+          />
+          <h1 data-testid="page-title">Drinks</h1>
+        </div>
+      </div>
+      <div>
+
+        <Footer />
+
         <img
           src="src/images/profileIcon.svg"
           alt="Profile"
@@ -114,7 +133,8 @@ function Drinks() {
           />
         ))}
       </div>
-    </div>
+
+    </>
   );
 }
 

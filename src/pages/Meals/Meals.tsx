@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../../Components/Header';
+import Footer from '../../Components/Footer';
 import RecipeCard from '../../Components/RecipeCard';
 
 interface Recipe {
@@ -87,36 +88,41 @@ function Meals() {
   const recipesToRender = recipes.slice(0, 12);
 
   return (
-    <div>
-      <Header />
-      {categories.map((category, index) => (
-        <button
-          key={ index }
-          onClick={ () => handleCategoryFilter(category) }
-          data-testid={ `${category}-category-filter` }
-        >
-          {category}
+    <>
+      <div>
+        <Header />
+        {categories.map((category, index) => (
+          <button
+            key={ index }
+            onClick={ () => handleCategoryFilter(category) }
+            data-testid={ `${category}-category-filter` }
+          >
+            {category}
+          </button>
+        ))}
+        <button onClick={ handleClearFilters } data-testid="All-category-filter">
+          Clear Filters
         </button>
-      ))}
-      <button onClick={ handleClearFilters } data-testid="All-category-filter">
-        Clear Filters
-      </button>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        recipesToRender.map((recipe, index) => (
-          <RecipeCard
-            key={ recipe.id }
-            id={ recipe.id }
-            index={ index }
-            imageUrl={ recipe.imageUrl }
-            name={ recipe.name }
-            data-testid="recipe-card"
-            isDrinks={ false }
-          />
-        ))
-      )}
-    </div>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          recipesToRender.map((recipe, index) => (
+            <RecipeCard
+              key={ recipe.id }
+              id={ recipe.id }
+              index={ index }
+              imageUrl={ recipe.imageUrl }
+              name={ recipe.name }
+              data-testid="recipe-card"
+              isDrinks={ false }
+            />
+          ))
+        )}
+      </div>
+      <div>
+        <Footer />
+      </div>
+    </>
   );
 }
 

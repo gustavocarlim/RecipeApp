@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 interface RecipeDetailsProps {
-  isDrinks: boolean; // Indica se é uma receita de drinks
+  isDrinks: boolean;
 }
 
 interface Recipe {

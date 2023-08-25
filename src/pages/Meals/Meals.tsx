@@ -72,7 +72,12 @@ function Meals() {
   }, [selectedCategory]);
 
   const handleCategoryFilter = (category: string) => {
-    setSelectedCategory(category);
+    if (category === selectedCategory) {
+      setSelectedCategory(null);
+    } else {
+      setSelectedCategory(category);
+      fetchRecipesByCategory(category);
+    }
   };
 
   const handleClearFilters = () => {
@@ -102,10 +107,12 @@ function Meals() {
         recipesToRender.map((recipe, index) => (
           <RecipeCard
             key={ recipe.id }
+            id={ recipe.id }
             index={ index }
             imageUrl={ recipe.imageUrl }
             name={ recipe.name }
             data-testid="recipe-card"
+            isDrinks={ false }
           />
         ))
       )}

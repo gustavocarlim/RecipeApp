@@ -63,7 +63,12 @@ function Drinks() {
   }, [selectedCategory]);
 
   const handleCategoryFilter = (category: string) => {
-    setSelectedCategory(category);
+    if (category === selectedCategory) {
+      setSelectedCategory(null);
+    } else {
+      setSelectedCategory(category);
+      fetchDrinksByCategory(category);
+    }
   };
 
   const handleClearFilters = () => {
@@ -101,9 +106,11 @@ function Drinks() {
         {drinksToRender.map((drink, index) => (
           <RecipeCard
             key={ drink.id }
+            id={ drink.id }
             index={ index }
             imageUrl={ drink.imageUrl }
             name={ drink.name }
+            isDrinks
           />
         ))}
       </div>

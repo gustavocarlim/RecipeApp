@@ -5,9 +5,9 @@ import Login from './pages/Login/Login';
 import Meals from './pages/Meals/Meals';
 import Drinks from './pages/Drinks/Drinks';
 import Profile from './pages/Profile/Profile';
-import DoneRecipes from './pages/DoneRecipes/doneRecipies';
-import FavoriteRecipes from './pages/FavoriteRecipies/favoriteRecipies';
-import RecipiesProvider from './context/RecipiesProvider';
+import DoneRecipes from './pages/DoneRecipes/doneRecipes';
+import FavoriteRecipes from './pages/FavoriteRecipes/favoriteRecipes';
+import RecipesProvider from './context/RecipesProvider';
 import RecipeDetails from './Components/RecipeDetails';
 
 function App() {

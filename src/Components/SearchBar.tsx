@@ -1,24 +1,46 @@
 import { useContext, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import RecipiesContext from '../context/RecipesContext';
 import { fetchIngredients, fetchName, fetchfirstLetter } from './services/Api';
+import { fetchIngredientsBebida, fetchNameBebida,
+  fetchfirstLetterBebida } from './services/ApiBebidas';
 
 function SearchBar() {
   const [radio, setRadio] = useState('');
   const { filter, setFilter } = useContext(RecipiesContext);
+  const location = useLocation();
 
   const handleClickSearchButton = async () => {
-    let results = [];
-    if (radio === 'ingredient') {
-      const response = await fetchIngredients(filter);
-      results = response;
-    } else if (radio === 'name') {
-      const response = await fetchName(filter);
-      results = response;
-    } else if (radio === 'firstLetter' && filter.length > 1) {
-      alert('Your search must have only 1 (one) character');
-    } else if (radio === 'firstLetter') {
-      const response = await fetchfirstLetter(filter);
-      results = response;
+    // comida henderizado pagina mells
+    if (location.pathname === '/meals') {
+      let results = [];
+      if (radio === 'ingredient') {
+        const response = await fetchIngredients(filter);
+        results = response;
+      } else if (radio === 'name') {
+        const response = await fetchName(filter);
+        results = response;
+      } else if (radio === 'firstLetter' && filter.length > 1) {
+        alert('Your search must have only 1 (one) character');
+      } else if (radio === 'firstLetter') {
+        const response = await fetchfirstLetter(filter);
+        results = response;
+      }
+    }
+    if (location.pathname === '/drinks') {
+      let results = [];
+      if (radio === 'ingredient') {
+        const response = await fetchIngredientsBebida(filter);
+        results = response;
+      } else if (radio === 'name') {
+        const response = await fetchNameBebida(filter);
+        results = response;
+      } else if (radio === 'firstLetter' && filter.length > 1) {
+        alert('Your search must have only 1 (one) character');
+      } else if (radio === 'firstLetter') {
+        const response = await fetchfirstLetterBebida(filter);
+        results = response;
+      }
     }
   };
 

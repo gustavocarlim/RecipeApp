@@ -1,4 +1,4 @@
-function FavoriteRecipies() {
+function FavoriteRecipes() {
   return (
     <div>
       <div>
@@ -13,4 +13,4 @@ function FavoriteRecipies() {
   );
 }
 
-export default FavoriteRecipies;
+export default FavoriteRecipes;

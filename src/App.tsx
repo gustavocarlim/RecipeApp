@@ -12,7 +12,7 @@ import RecipeDetails from './Components/RecipeDetails';
 
 function App() {
   return (
-    <RecipiesProvider>
+    <RecipesProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={ <Login /> } />
@@ -25,7 +25,7 @@ function App() {
           <Route path="/drinks/:id" element={ <RecipeDetails isDrinks /> } />
         </Routes>
       </BrowserRouter>
-    </RecipiesProvider>
+    </RecipesProvider>
   );
 }
 

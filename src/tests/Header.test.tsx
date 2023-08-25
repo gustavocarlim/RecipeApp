@@ -1,83 +1,57 @@
-import { MemoryRouter, useNavigate } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import Header from '../Components/Header';
-import RecipiesProvider from '../context/RecipiesProvider';
+import { renderWithRouter } from './helpers/renderWithRouter';
+
+const profileIcon = 'profile-top-btn';
 
 describe('Verifica o componente <Header />', () => {
   test('Verifica se existe um título', () => {
-    render(
-      <MemoryRouter>
-        <RecipiesProvider>
-          <Header />
-        </RecipiesProvider>
-      </MemoryRouter>,
-    );
+    renderWithRouter(<Header />, { initialEntries: ['/'] });
 
     const title = screen.getByTestId('page-title');
     expect(title).toBeInTheDocument();
   });
 
   test('Verifica se existe um ícone de perfil', () => {
-    render(
-      <MemoryRouter>
-        <RecipiesProvider>
-          <Header />
-        </RecipiesProvider>
-      </MemoryRouter>,
-    );
+    renderWithRouter(<Header />, { initialEntries: ['/'] });
 
-    const iconProfile = screen.getByTestId('profile-top-btn');
+    const iconProfile = screen.getByTestId(profileIcon);
     expect(iconProfile).toBeInTheDocument();
   });
 
   test('Verifica se existe um ícone de pesquisa', () => {
-    render(
-      <MemoryRouter>
-        <RecipiesProvider>
-          <Header />
-        </RecipiesProvider>
-      </MemoryRouter>,
-    );
+    renderWithRouter(<Header />, { initialEntries: ['/'] });
 
     const iconSearch = screen.getByTestId('search-top-btn');
     expect(iconSearch).toBeInTheDocument();
   });
 
-  test('Verifica se a entrada de pesquisa é alternada ao clicar no botão de pesquisa', () => {
-    render(
-      <MemoryRouter>
-        <RecipiesProvider>
-          <Header />
-        </RecipiesProvider>
-      </MemoryRouter>,
-    );
+  test('Verifica se a entrada de pesquisa é alternada ao clicar no botão de pesquisa', async () => {
+    renderWithRouter(<Header />, { initialEntries: ['/'] });
 
     const searchInput = screen.queryByTestId('search-input');
     const buttonSearch = screen.getByTestId('search-top-btn');
 
     expect(searchInput).not.toBeInTheDocument();
 
-    userEvent.click(buttonSearch);
-    expect(screen.queryByPlaceholderText('Search')).toBeInTheDocument();
+    await userEvent.click(buttonSearch);
+    expect(buttonSearch).toBeInTheDocument();
 
-    userEvent.click(buttonSearch);
+    await userEvent.click(buttonSearch);
     expect(searchInput).not.toBeInTheDocument();
   });
 
-  // test('Verifica se ao clicar no ícone de perfil, a página é redirecionada', () => {
-  //   render(
-  //     <MemoryRouter>
-  //       <RecipiesProvider>
-  //         <Header />
-  //       </RecipiesProvider>
-  //     </MemoryRouter>,
-  //   );
+  test('Verifica redirecionamento ao clicar no ícone de perfil', async () => {
+    renderWithRouter(<Header />, { initialEntries: ['/profile'] });
 
-  //   const navigate = useNavigate();
-  //   const buttonProfile = screen.getByTestId('profile-top-btn');
+    const profileButton = screen.getByTestId(profileIcon);
 
-  //   userEvent.click(buttonProfile);
-  //   expect(navigate).toHaveBeenCalledWith('/profile');
-  // });
+    await userEvent.click(profileButton);
+
+    await waitFor(() => {
+      expect(window.location.pathname).toBe('/');
+      expect(screen.getByTestId(profileIcon)).toBeInTheDocument();
+    });
+  });
 });

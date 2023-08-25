@@ -6,11 +6,11 @@ interface RecipeCardProps {
   index: number;
   imageUrl: string;
   name: string;
-  isDrinks: boolean; // Nova propriedade para verificar se é uma receita de drinks
+  isDrinks: boolean;
 }
 
 function RecipeCard({ id, index, imageUrl, name, isDrinks }: RecipeCardProps) {
-  const basePath = isDrinks ? '/drinks' : '/meals'; // Determinar o caminho base com base em isDrinks
+  const basePath = isDrinks ? '/drinks' : '/meals';
 
   return (
     <Link to={ `${basePath}/${id}` }>

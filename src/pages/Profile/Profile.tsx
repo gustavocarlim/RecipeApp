@@ -14,6 +14,19 @@ function Profile() {
     }
   }, []);
 
+  const handleDoneRecipes = () => {
+    navigate('/done-recipes');
+  };
+
+  const handleFavoriteRecipes = () => {
+    navigate('/favorite-recipes');
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/');
+  };
+
   return (
     <>
       <div>
@@ -30,16 +43,19 @@ function Profile() {
         </h4>
         <button
           data-testid="profile-done-btn"
+          onClick={ handleDoneRecipes }
         >
           Done Recipes
         </button>
         <button
           data-testid="profile-favorite-btn"
+          onClick={ handleFavoriteRecipes }
         >
           Favorite Recipes
         </button>
         <button
           data-testid="profile-logout-btn"
+          onClick={ handleLogout }
         >
           Logout
         </button>

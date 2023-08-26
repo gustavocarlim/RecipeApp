@@ -44,18 +44,21 @@ function Profile() {
         <button
           data-testid="profile-done-btn"
           onClick={ handleDoneRecipes }
+          name="done-recipes"
         >
           Done Recipes
         </button>
         <button
           data-testid="profile-favorite-btn"
           onClick={ handleFavoriteRecipes }
+          name="favorite-recipes"
         >
           Favorite Recipes
         </button>
         <button
           data-testid="profile-logout-btn"
           onClick={ handleLogout }
+          name="logout"
         >
           Logout
         </button>

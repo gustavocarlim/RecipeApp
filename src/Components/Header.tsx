@@ -33,7 +33,6 @@ function Header() {
         />
       </button>
       {button ? <input data-testid="search-input" type="text" name="" id="" /> : null}
-      <h1 data-testid="page-title">Meals</h1>
     </div>
   );
 }

@@ -9,29 +9,23 @@ interface Recipe {
   imageUrl: string;
   name: string;
 }
-
 function Meals() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
   const fetchCategories = async () => {
     let url = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
-
     if (selectedCategory) {
       url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
     }
-
     const response = await fetch(url);
     const data = await response.json();
-
     if (data.meals) {
       const categoryData = data.meals.map((category: any) => category.strCategory);
       setCategories(categoryData.slice(0, 5));
     }
   };
-
   const fetchRecipesByCategory = async (category: string) => {
     try {
       setIsLoading(true);
@@ -52,7 +46,6 @@ function Meals() {
       setIsLoading(false);
     }
   };
-
   const fetchRecipes = async () => {
     const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
     const data = await response.json();
@@ -63,7 +56,6 @@ function Meals() {
     }));
     setRecipes(recipeData);
   };
-
   useEffect(() => {
     fetchCategories();
     if (selectedCategory) {
@@ -72,7 +64,6 @@ function Meals() {
       fetchRecipes();
     }
   }, [selectedCategory]);
-
   const handleCategoryFilter = (category: string) => {
     if (category === selectedCategory) {
       setSelectedCategory(null);
@@ -81,11 +72,9 @@ function Meals() {
       fetchRecipesByCategory(category);
     }
   };
-
   const handleClearFilters = () => {
     setSelectedCategory(null);
   };
-
   const recipesToRender = recipes.slice(0, 12);
 
   return (
@@ -127,5 +116,4 @@ function Meals() {
     </>
   );
 }
-
 export default Meals;

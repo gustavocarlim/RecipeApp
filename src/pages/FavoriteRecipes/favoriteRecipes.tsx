@@ -1,10 +1,10 @@
 import Footer from '../../Components/Footer';
 import Header from '../../Components/Header';
+import { Recipe } from '../../Components/RecipeDetails';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import shareIcon from '../../images/shareIcon.svg';
 
-function FavoriteRecipes() {
-  localStorage.getItem()
+function FavoriteRecipes({ id, name, category, alcoholic, imageUrl }: Recipe) {
   return (
     <>
       <Header />

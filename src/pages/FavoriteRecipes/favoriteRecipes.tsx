@@ -4,7 +4,7 @@ import { Recipe } from '../../Components/RecipeDetails';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import shareIcon from '../../images/shareIcon.svg';
 
-function FavoriteRecipes({ id, name, category, alcoholic, imageUrl }: Recipe) {
+function FavoriteRecipes({ id, name, category, imageUrl }: Recipe) {
   return (
     <>
       <Header />
@@ -40,7 +40,7 @@ function FavoriteRecipes({ id, name, category, alcoholic, imageUrl }: Recipe) {
             <p
               data-testid={ `${id}-horizontal-top-text` }
             >
-              Categoria
+              {category}
             </p>
             <button
               data-testid={ `${id}-horizontal-share-btn` }

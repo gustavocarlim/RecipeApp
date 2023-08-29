@@ -15,6 +15,7 @@ function FavoriteRecipes() {
   const storedFavorites = JSON.parse(localStorage.getItem('favoriteRecipes') || '[]');
 
   const [favoriteRecipes, setFavoriteRecipes] = useState<Recipe[]>(storedFavorites);
+  const [isLinkCopied, setIsLinkCopied] = useState(false);
 
   const handleFavoriteChange = (index: number) => {
     const updatedFavorites = [...favoriteRecipes];
@@ -22,6 +23,20 @@ function FavoriteRecipes() {
 
     setFavoriteRecipes(updatedFavorites);
     localStorage.setItem('favoriteRecipes', JSON.stringify(updatedFavorites));
+  };
+
+  const copyLinkToClipboard = async () => {
+    const link = window.location.href;
+
+    try {
+      await navigator.clipboard.writeText(link);
+      setIsLinkCopied(true);
+      setTimeout(() => {
+        setIsLinkCopied(false);
+      }, 3000);
+    } catch (error) {
+      console.error('Error copying link to clipboard:', error);
+    }
   };
 
   return (
@@ -68,14 +83,19 @@ function FavoriteRecipes() {
                 </p>
                 <button
                   data-testid={ `${index}-horizontal-share-btn` }
+                  onClick={ copyLinkToClipboard }
                 >
-                  {shareIcon}
+                  <img
+                    src={ shareIcon }
+                    alt="share"
+                  />
+                  {isLinkCopied && <p>Link copied!</p>}
                 </button>
                 <button
                   data-testid={ `${index}-horizontal-favorite-btn` }
-                  onChange={ () => { handleFavoriteChange(index); return null; } }
+                  onClick={ () => handleFavoriteChange(index) }
                 >
-                  {blackHeartIcon}
+                  <img src={ blackHeartIcon } alt="favorite" />
                 </button>
               </div>
             ))}

@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { RecipesType } from '../types';
-import RecipiesContext from './RecipesContext';
+import RecipesContext from './RecipesContext';
+
+type FilterType = { type: string; value: string };
 
 function RecipiesProvider({ children }: { children: React.ReactNode }) {
-  const [recipies, setRecipies] = useState<RecipesType[]>([]);
-  const [filter, setFilter] = useState('');
+  const [recipes, setRecipies] = useState<RecipesType[]>([]);
+  const [filter, setFilter] = useState<FilterType>({ type: '', value: '' });
 
   return (
-    <RecipiesContext.Provider value={ { recipies, setRecipies, filter, setFilter } }>
+    <RecipesContext.Provider value={ { recipes, setRecipies, filter, setFilter } }>
       {children}
-    </RecipiesContext.Provider>
+    </RecipesContext.Provider>
   );
 }
 

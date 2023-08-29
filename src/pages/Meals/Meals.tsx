@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../Components/Header';
 import SearchBar from '../../Components/SearchBar';
 import Footer from '../../Components/Footer';
 import RecipeCard from '../../Components/RecipeCard';
+import RecipesContext from '../../context/RecipesContext';
+import { fetchName,
+  fetchfirstLetter,
+  fetchIngredients } from '../../Components/services/Api';
 
 interface Recipe {
   id: string;
@@ -14,6 +19,9 @@ function Meals() {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { filter } = useContext(RecipesContext);
+  const navigate = useNavigate();
+
   const fetchCategories = async () => {
     let url = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
     if (selectedCategory) {
@@ -56,14 +64,50 @@ function Meals() {
     }));
     setRecipes(recipeData);
   };
+
   useEffect(() => {
     fetchCategories();
-    if (selectedCategory) {
-      fetchRecipesByCategory(selectedCategory);
-    } else {
-      fetchRecipes();
+    fetchRecipes();
+    fetchRecipesByCategory(selectedCategory || '');
+
+    if (filter.type === 'name') {
+      console.log('Fetching by name:', filter.value);
+      fetchName(filter.value).then((data) => {
+        const recipeData = data.meals.map((meal: any) => ({
+          id: meal.idMeal,
+          imageUrl: meal.strMealThumb,
+          name: meal.strMeal,
+        }));
+        if (recipeData.length === 1) {
+          const recipeId = recipeData[0].id;
+          navigate(`/meals/${recipeId}`);
+        } else {
+          setRecipes(recipeData);
+        }
+      });
+    } else if (filter.type === 'firstletter') {
+      console.log('Fetching by first letter:', filter.value);
+      fetchfirstLetter(filter.value).then((data) => {
+        const recipeData = data.meals.map((meal: any) => ({
+          id: meal.idMeal,
+          imageUrl: meal.strMealThumb,
+          name: meal.strMeal,
+        }));
+        setRecipes(recipeData);
+      });
+    } else if (filter.type === 'ingredientes') {
+      console.log('Fetching by ingredients:', filter.value);
+      fetchIngredients(filter.value).then((data) => {
+        const recipeData = data.meals.map((meal: any) => ({
+          id: meal.idMeal,
+          imageUrl: meal.strMealThumb,
+          name: meal.strMeal,
+        }));
+        setRecipes(recipeData);
+      });
     }
-  }, [selectedCategory]);
+  }, [selectedCategory, filter]);
+
   const handleCategoryFilter = (category: string) => {
     if (category === selectedCategory) {
       setSelectedCategory(null);

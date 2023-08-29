@@ -1,8 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../Components/Header';
 import SearchBar from '../../Components/SearchBar';
 import Footer from '../../Components/Footer';
 import RecipeCard from '../../Components/RecipeCard';
+import RecipesContext from '../../context/RecipesContext';
+import {
+  fetchIngredientsBebida,
+  fetchNameBebida,
+  fetchfirstLetterBebida } from '../../Components/services/ApiBebidas';
 
 interface Drink {
   id: string;
@@ -13,6 +19,10 @@ function Drinks() {
   const [drinks, setDrinks] = useState<Drink[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const { filter } = useContext(RecipesContext);
+  const navigate = useNavigate();
+  const [searchFailed, setSearchFailed] = useState(false);
+
   const fetchCategories = async () => {
     let url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
     if (selectedCategory) {
@@ -53,10 +63,48 @@ function Drinks() {
     }
   };
   useEffect(() => {
-    fetchDrinks();
     fetchCategories();
+    fetchDrinks();
     fetchDrinksByCategory(selectedCategory || '');
-  }, [selectedCategory]);
+
+    if (filter.type === 'name') {
+      console.log('Fetching by name:', filter.value);
+      fetchNameBebida(filter.value).then((data) => {
+        const drinkData = data.drinks.map((drink: any) => ({
+          id: drink.idDrink,
+          imageUrl: drink.strDrinkThumb,
+          name: drink.strDrink,
+        }));
+        if (drinkData.length === 1) {
+          const drinkId = drinkData[0].id;
+          navigate(`/drinks/${drinkId}`);
+        } else {
+          setDrinks(drinkData);
+        }
+      });
+    } else if (filter.type === 'firstletter') {
+      console.log('Fetching by first letter:', filter.value);
+      fetchfirstLetterBebida(filter.value).then((data) => {
+        const drinkData = data.drinks.map((drink: any) => ({
+          id: drink.idDrink,
+          imageUrl: drink.strDrinkThumb,
+          name: drink.strDrink,
+        }));
+        setDrinks(drinkData);
+      });
+    } else if (filter.type === 'ingredientes') {
+      console.log('Fetching by ingredients:', filter.value);
+      fetchIngredientsBebida(filter.value).then((data) => {
+        const drinkData = data.drinks.map((drink: any) => ({
+          id: drink.idDrink,
+          imageUrl: drink.strDrinkThumb,
+          name: drink.strDrink,
+        }));
+        setDrinks(drinkData);
+      });
+    }
+  }, [selectedCategory, filter]);
+
   const handleCategoryFilter = (category: string) => {
     if (category === selectedCategory) {
       setSelectedCategory(null);
@@ -65,6 +113,7 @@ function Drinks() {
       fetchDrinksByCategory(category);
     }
   };
+
   const handleClearFilters = () => {
     setSelectedCategory(null);
   };

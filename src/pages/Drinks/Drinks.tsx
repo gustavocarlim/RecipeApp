@@ -68,7 +68,6 @@ function Drinks() {
     fetchDrinksByCategory(selectedCategory || '');
 
     if (filter.type === 'name') {
-      console.log('Fetching by name:', filter.value);
       fetchNameBebida(filter.value).then((data) => {
         const drinkData = data.drinks.map((drink: any) => ({
           id: drink.idDrink,
@@ -83,7 +82,6 @@ function Drinks() {
         }
       });
     } else if (filter.type === 'firstletter') {
-      console.log('Fetching by first letter:', filter.value);
       fetchfirstLetterBebida(filter.value).then((data) => {
         const drinkData = data.drinks.map((drink: any) => ({
           id: drink.idDrink,
@@ -93,7 +91,6 @@ function Drinks() {
         setDrinks(drinkData);
       });
     } else if (filter.type === 'ingredientes') {
-      console.log('Fetching by ingredients:', filter.value);
       fetchIngredientsBebida(filter.value).then((data) => {
         const drinkData = data.drinks.map((drink: any) => ({
           id: drink.idDrink,

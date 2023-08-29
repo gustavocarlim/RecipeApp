@@ -71,7 +71,6 @@ function Meals() {
     fetchRecipesByCategory(selectedCategory || '');
 
     if (filter.type === 'name') {
-      console.log('Fetching by name:', filter.value);
       fetchName(filter.value).then((data) => {
         const recipeData = data.meals.map((meal: any) => ({
           id: meal.idMeal,
@@ -86,7 +85,6 @@ function Meals() {
         }
       });
     } else if (filter.type === 'firstletter') {
-      console.log('Fetching by first letter:', filter.value);
       fetchfirstLetter(filter.value).then((data) => {
         const recipeData = data.meals.map((meal: any) => ({
           id: meal.idMeal,
@@ -96,7 +94,6 @@ function Meals() {
         setRecipes(recipeData);
       });
     } else if (filter.type === 'ingredientes') {
-      console.log('Fetching by ingredients:', filter.value);
       fetchIngredients(filter.value).then((data) => {
         const recipeData = data.meals.map((meal: any) => ({
           id: meal.idMeal,

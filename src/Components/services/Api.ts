@@ -3,7 +3,7 @@ export const fetchIngredients = async (ingredient: string) => {
   const data = await response.json();
 
   if (!data.meals || data.meals.length === 0) {
-    alert('No recipes found for this ingredient.');
+    window.alert('No recipes found for this ingredient.');
   }
 
   return data;
@@ -14,7 +14,8 @@ export const fetchName = async (name: string) => {
   const data = await response.json();
 
   if (!data.meals || data.meals.length === 0) {
-    alert('No recipes found for this name.');
+    window.alert("Sorry, we haven't found any recipes for these filters.");
+    return { meals: [] };
   }
 
   return data;
@@ -22,7 +23,7 @@ export const fetchName = async (name: string) => {
 
 export const fetchfirstLetter = async (firstLetter: string) => {
   if (firstLetter.length !== 1 || firstLetter === '0') {
-    alert('Please enter only one letter for First Letter search.');
+    window.alert('Your search must have only 1 (one) character');
     return { meals: [] };
   }
 

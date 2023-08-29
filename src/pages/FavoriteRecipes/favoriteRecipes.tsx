@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../../Components/Footer';
 import Header from '../../Components/Header';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
@@ -17,12 +18,16 @@ function FavoriteRecipes() {
 
   const [favoriteRecipes, setFavoriteRecipes] = useState<Recipe[]>(storedFavorites);
   const [copiedRecipeId, setCopiedRecipeId] = useState<number | null>(null);
+  const [currentCategory, setcurrentCategory] = useState<string>('all');
+  const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>(favoriteRecipes);
+  // const [isDrink, setIsDrink] = useState(false);
 
   const handleFavoriteChange = (index: number) => {
     const updatedFavorites = [...favoriteRecipes];
     updatedFavorites.splice(index, 1);
 
     setFavoriteRecipes(updatedFavorites);
+    setFilteredRecipes(updatedFavorites);
     localStorage.setItem('favoriteRecipes', JSON.stringify(updatedFavorites));
   };
 
@@ -40,6 +45,27 @@ function FavoriteRecipes() {
     }
   };
 
+  const handleFilterChange = (category: string) => {
+    setcurrentCategory(category);
+    if (category === 'all') {
+      setFilteredRecipes(favoriteRecipes);
+    } else {
+      const filtered = favoriteRecipes
+        .filter((recipe) => recipe.category === category
+        && window.location.pathname.includes(`/${category}`));
+      setFilteredRecipes(filtered);
+    }
+  };
+
+  const path = () => {
+    if (window.location.pathname.includes('/drinks')) {
+      // setIsDrink(true);
+      return 'drinks';
+    }
+    // setIsDrink(false);
+    return 'meals';
+  };
+
   return (
     <>
       <Header />
@@ -48,32 +74,33 @@ function FavoriteRecipes() {
           <h1 data-testid="page-title">Favorites</h1>
           <button
             data-testid="filter-by-all-btn"
+            onClick={ () => { handleFilterChange('all'); } }
           >
             All
           </button>
           <button
             data-testid="filter-by-meal-btn"
+            onClick={ () => { handleFilterChange('meals'); } }
           >
             Meals
           </button>
           <button
             data-testid="filter-by-drink-btn"
+            onClick={ () => { handleFilterChange('drinks'); } }
           >
             Drinks
           </button>
           <section>
-            {favoriteRecipes.map((recipe, index) => (
+            {filteredRecipes.map((recipe, index) => (
               <div key={ recipe.id }>
-                <img
-                  src={ recipe.imageUrl }
-                  alt={ recipe.name }
-                  data-testid={ `${index}-horizontal-image` }
-                />
-                <h5
-                  data-testid={ `${index}-horizontal-name` }
-                >
-                  {recipe.name}
-                </h5>
+                <Link to={ `/${path()}/${recipe.id}` }>
+                  <img
+                    src={ recipe.imageUrl }
+                    alt={ recipe.name }
+                    data-testid={ `${index}-horizontal-image` }
+                  />
+                  <h5 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h5>
+                </Link>
                 <p
                   data-testid={ `${index}-horizontal-top-text` }
                 >

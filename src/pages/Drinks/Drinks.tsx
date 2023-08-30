@@ -98,7 +98,6 @@ function Drinks() {
       </div>
       <div>
 
-        <Footer />
         {categories.map((category, index) => (
           <button
             key={ index }
@@ -121,6 +120,7 @@ function Drinks() {
             isDrinks
           />
         ))}
+        <Footer />
       </div>
 
     </>
@@ -128,3 +128,4 @@ function Drinks() {
 }
 
 export default Drinks;
+// ;

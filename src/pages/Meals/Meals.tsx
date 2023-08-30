@@ -122,6 +122,7 @@ function Meals() {
     <>
       <div>
         <Header />
+        <h1 data-testid="page-title">Meals</h1>
         <SearchBar />
         {categories.map((category, index) => (
           <button

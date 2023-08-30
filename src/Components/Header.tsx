@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import RecipesContext from '../context/RecipesContext';
 
 function Header() {
   const [button, setButton] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const { setFilter } = useContext(RecipesContext);
 
   const navigate = useNavigate();
 
@@ -14,6 +17,14 @@ function Header() {
     setButton(!button);
   };
 
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
+  const handleSearch = () => {
+    setFilter({ type: 'name', value: searchValue });
+  };
+
   return (
     <div>
       <button onClick={ handleButton }>
@@ -22,7 +33,6 @@ function Header() {
           alt="Profile"
           data-testid="profile-top-btn"
         />
-
       </button>
       <button onClick={ toggleSearch }>
         <img
@@ -32,8 +42,18 @@ function Header() {
           data-testid="search-top-btn"
         />
       </button>
-      {button ? <input data-testid="search-input" type="text" name="" id="" /> : null}
-      <h1 data-testid="page-title">Meals</h1>
+      {button ? (
+        <div>
+          <input
+            onChange={ handleSearchInput }
+            data-testid="search-input"
+            type="text"
+            placeholder="Search..."
+            value={ searchValue }
+            id="header-search-input"
+          />
+        </div>
+      ) : null}
     </div>
   );
 }

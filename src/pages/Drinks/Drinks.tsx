@@ -43,6 +43,7 @@ function Drinks() {
       imageUrl: drink.strDrinkThumb,
       name: drink.strDrink,
     }));
+    console.log(data);
     setDrinks(drinkData);
   };
   const fetchDrinksByCategory = async (category: string) => {
@@ -119,9 +120,11 @@ function Drinks() {
   return (
     <>
       <div>
+
         <Header />
         <SearchBar />
         <h1 data-testid="page-title">Drinks</h1>
+
         {categories.map((category, index) => (
           <button
             key={ index }
@@ -144,9 +147,11 @@ function Drinks() {
             isDrinks
           />
         ))}
+        <Footer />
       </div>
       <Footer />
     </>
   );
 }
 export default Drinks;
+// ;

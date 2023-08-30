@@ -2,7 +2,8 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Drinks from '../pages/Drinks/Drinks';
 import { renderWithRouter } from './helpers/renderWithRouter';
-const mockData = 
+
+/* const mockData =  */
 describe('Verifica o componente Drinks', () => {
   test('Verifica se existe um título', () => {
     renderWithRouter(<Drinks />, { initialEntries: ['/'] });
@@ -34,11 +35,9 @@ describe('Verifica o componente Drinks', () => {
     userEvent.click(clearbtn);
     expect(await screen.findByText('GG')).toBeInTheDocument();
   });
-  test('Verifica erro', () => {
+/*   test('Verifica erro', () => {
 global.fetch = vi.fn().mockResolvedValue({
   json: async() => ()
 })
-  });
+  }); */
 });
-
-

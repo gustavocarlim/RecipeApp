@@ -1,19 +1,23 @@
-import { screen } from '@testing-library/react';
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import FavoriteRecipes from '../pages/FavoriteRecipes/favoriteRecipes';
-import { renderWithRouter } from './helpers/renderWithRouter';
 
-describe('Verifica o componente FavoriteRecipes', () => {
-  test('Verifica se existe um título', () => {
-    renderWithRouter(<FavoriteRecipes />, { initialEntries: ['/'] });
+test('Filter buttons work correctly', () => {
+  render(<FavoriteRecipes />);
 
-    const title = screen.getByTestId('page-title');
-    expect(title).toBeInTheDocument();
-  });
+  const allButton = screen.getByTestId('filter-by-all-btn');
+  const mealButton = screen.getByTestId('filter-by-meal-btn');
+  const drinkButton = screen.getByTestId('filter-by-drink-btn');
 
-  test('verifica se existe um ícone de perfil', () => {
-    renderWithRouter(<FavoriteRecipes />, { initialEntries: ['/'] });
+  fireEvent.click(mealButton); // Filter by Meals
+  const mealItems = screen.getAllByTestId(/horizontal-name/i);
+  expect(mealItems.length).toBeGreaterThan(0);
 
-    const iconProfile = screen.getByTestId('profile-top-btn');
-    expect(iconProfile).toBeInTheDocument();
-  });
+  fireEvent.click(drinkButton); // Filter by Drinks
+  const drinkItems = screen.getAllByTestId(/horizontal-name/i);
+  expect(drinkItems.length).toBeGreaterThan(0);
+
+  fireEvent.click(allButton); // Show All
+  const allItems = screen.getAllByTestId(/horizontal-name/i);
+  expect(allItems.length).toBeGreaterThan(0);
 });

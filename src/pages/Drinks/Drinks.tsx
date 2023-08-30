@@ -151,6 +151,7 @@ function Drinks() {
       </div>
       <Footer />
     </>
+
   );
 }
 export default Drinks;

@@ -35,7 +35,7 @@ function Profile() {
           alt="Profile"
           data-testid="profile-top-btn"
         />
-        <h1 data-testid="page-title">PROFILE</h1>
+        <h1 data-testid="page-title">Profile</h1>
         <h4
           data-testid="profile-email"
         >

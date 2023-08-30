@@ -5,14 +5,14 @@ import Login from './pages/Login/Login';
 import Meals from './pages/Meals/Meals';
 import Drinks from './pages/Drinks/Drinks';
 import Profile from './pages/Profile/Profile';
-import DoneRecipes from './pages/DoneRecipes/doneRecipes';
+import DoneRecipes from './pages/DoneRecipes/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes/favoriteRecipes';
-import RecipesProvider from './context/RecipesProvider';
 import RecipeDetails from './Components/RecipeDetails';
+import RecipiesProvider from './context/RecipiesProvider';
 
 function App() {
   return (
-    <RecipesProvider>
+    <RecipiesProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={ <Login /> } />
@@ -25,7 +25,7 @@ function App() {
           <Route path="/drinks/:id" element={ <RecipeDetails isDrinks /> } />
         </Routes>
       </BrowserRouter>
-    </RecipesProvider>
+    </RecipiesProvider>
   );
 }
 

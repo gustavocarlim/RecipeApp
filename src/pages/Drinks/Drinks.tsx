@@ -1,25 +1,33 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Header from '../../Components/Header';
+import SearchBar from '../../Components/SearchBar';
 import Footer from '../../Components/Footer';
 import RecipeCard from '../../Components/RecipeCard';
+import RecipesContext from '../../context/RecipesContext';
+import {
+  fetchIngredientsBebida,
+  fetchNameBebida,
+  fetchfirstLetterBebida } from '../../Components/services/ApiBebidas';
 
 interface Drink {
   id: string;
   imageUrl: string;
   name: string;
 }
-
 function Drinks() {
   const [drinks, setDrinks] = useState<Drink[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const { filter } = useContext(RecipesContext);
+  const navigate = useNavigate();
+  const [searchFailed, setSearchFailed] = useState(false);
 
   const fetchCategories = async () => {
-    const url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
-
-    /*  if (selectedCategory) {
+    let url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+    if (selectedCategory) {
       url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
-    } */
-
+    }
     const response = await fetch(url);
     const data = await response.json();
     const categoryData = data.drinks ? data.drinks.map(
@@ -27,7 +35,6 @@ function Drinks() {
     ) : [];
     setCategories(categoryData.slice(0, 5));
   };
-
   const fetchDrinks = async () => {
     const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
     const data = await response.json();
@@ -39,7 +46,6 @@ function Drinks() {
     console.log(data);
     setDrinks(drinkData);
   };
-
   const fetchDrinksByCategory = async (category: string) => {
     try {
       const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
@@ -57,12 +63,45 @@ function Drinks() {
       console.error('Error fetching drinks:', error);
     }
   };
-
   useEffect(() => {
-    fetchDrinks();
     fetchCategories();
+    fetchDrinks();
     fetchDrinksByCategory(selectedCategory || '');
-  }, [selectedCategory]);
+
+    if (filter.type === 'name') {
+      fetchNameBebida(filter.value).then((data) => {
+        const drinkData = data.drinks.map((drink: any) => ({
+          id: drink.idDrink,
+          imageUrl: drink.strDrinkThumb,
+          name: drink.strDrink,
+        }));
+        if (drinkData.length === 1) {
+          const drinkId = drinkData[0].id;
+          navigate(`/drinks/${drinkId}`);
+        } else {
+          setDrinks(drinkData);
+        }
+      });
+    } else if (filter.type === 'firstletter') {
+      fetchfirstLetterBebida(filter.value).then((data) => {
+        const drinkData = data.drinks.map((drink: any) => ({
+          id: drink.idDrink,
+          imageUrl: drink.strDrinkThumb,
+          name: drink.strDrink,
+        }));
+        setDrinks(drinkData);
+      });
+    } else if (filter.type === 'ingredientes') {
+      fetchIngredientsBebida(filter.value).then((data) => {
+        const drinkData = data.drinks.map((drink: any) => ({
+          id: drink.idDrink,
+          imageUrl: drink.strDrinkThumb,
+          name: drink.strDrink,
+        }));
+        setDrinks(drinkData);
+      });
+    }
+  }, [selectedCategory, filter]);
 
   const handleCategoryFilter = (category: string) => {
     if (category === selectedCategory) {
@@ -76,27 +115,15 @@ function Drinks() {
   const handleClearFilters = () => {
     setSelectedCategory(null);
   };
-
   const drinksToRender = drinks.slice(0, 12);
 
   return (
     <>
       <div>
-        <div>
-          <img
-            src="src/images/profileIcon.svg"
-            alt="Profile"
-            data-testid="profile-top-btn"
-          />
-          <img
-            src="src/images/searchIcon.svg"
-            alt="Search"
-            data-testid="search-top-btn"
-          />
-          <h1 data-testid="page-title">Drinks</h1>
-        </div>
-      </div>
-      <div>
+
+        <Header />
+        <SearchBar />
+        <h1 data-testid="page-title">Drinks</h1>
 
         {categories.map((category, index) => (
           <button
@@ -122,10 +149,9 @@ function Drinks() {
         ))}
         <Footer />
       </div>
-
+      <Footer />
     </>
   );
 }
-
 export default Drinks;
 // ;

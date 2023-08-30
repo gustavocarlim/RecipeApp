@@ -7,10 +7,12 @@ import shareIcon from '../../images/shareIcon.svg';
 
 interface Recipe {
   id: number;
-  imageUrl: string;
+  image: string;
   name: string;
-  nacionality: string;
+  nationality: string;
   category: string;
+  type: string;
+  alcoholicOrNot: string;
 }
 
 function FavoriteRecipes() {
@@ -20,7 +22,6 @@ function FavoriteRecipes() {
   const [copiedRecipeId, setCopiedRecipeId] = useState<number | null>(null);
   const [currentCategory, setcurrentCategory] = useState<string>('all');
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>(favoriteRecipes);
-  // const [isDrink, setIsDrink] = useState(false);
 
   const handleFavoriteChange = (index: number) => {
     const updatedFavorites = [...favoriteRecipes];
@@ -32,7 +33,7 @@ function FavoriteRecipes() {
   };
 
   const copyLinkToClipboard = async (recipeId: number) => {
-    const link = `${window.location.origin}/meals/${recipeId}`; // Assuming the link structure
+    const link = `${window.location.origin}/meals/${recipeId}`;
 
     try {
       await navigator.clipboard.writeText(link);
@@ -57,13 +58,14 @@ function FavoriteRecipes() {
     }
   };
 
-  const path = () => {
-    if (window.location.pathname.includes('/drinks')) {
-      // setIsDrink(true);
+  const path = (recipe: Recipe) => {
+    console.log(recipe);
+
+    if (recipe.type.includes('drink')) {
       return 'drinks';
+    } if (recipe.type.includes('meal')) {
+      return 'meals';
     }
-    // setIsDrink(false);
-    return 'meals';
   };
 
   return (
@@ -93,9 +95,9 @@ function FavoriteRecipes() {
           <section>
             {filteredRecipes.map((recipe, index) => (
               <div key={ recipe.id }>
-                <Link to={ `/${path()}/${recipe.id}` }>
+                <Link to={ `/${path(recipe)}/${recipe.id}` }>
                   <img
-                    src={ recipe.imageUrl }
+                    src={ recipe.image }
                     alt={ recipe.name }
                     data-testid={ `${index}-horizontal-image` }
                   />
@@ -104,26 +106,31 @@ function FavoriteRecipes() {
                 <p
                   data-testid={ `${index}-horizontal-top-text` }
                 >
-                  {recipe.nacionality}
-                  ,
+                  {recipe.nationality}
+                  {' '}
+                  -
                   {' '}
                   {recipe.category}
+                  {recipe.alcoholicOrNot && (<p>{recipe.alcoholicOrNot}</p>)}
                 </p>
                 <button
-                  data-testid={ `${index}-horizontal-share-btn` }
                   onClick={ () => copyLinkToClipboard(recipe.id) }
                 >
                   <img
+                    data-testid={ `${index}-horizontal-share-btn` }
                     src={ shareIcon }
                     alt="share"
                   />
                   {copiedRecipeId === recipe.id && <p>Link copied!</p>}
                 </button>
                 <button
-                  data-testid={ `${index}-horizontal-favorite-btn` }
                   onClick={ () => handleFavoriteChange(index) }
                 >
-                  <img src={ blackHeartIcon } alt="favorite" />
+                  <img
+                    data-testid={ `${index}-horizontal-favorite-btn` }
+                    src={ blackHeartIcon }
+                    alt="favorite"
+                  />
                 </button>
               </div>
             ))}

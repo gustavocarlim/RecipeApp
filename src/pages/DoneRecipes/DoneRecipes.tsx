@@ -1,3 +1,5 @@
+import DoneRecipes from '../../Components/DoneRecipes';
+
 function DoneRecipies() {
   return (
     <div>
@@ -8,6 +10,7 @@ function DoneRecipies() {
           data-testid="profile-top-btn"
         />
         <h1 data-testid="page-title">Done Recipes</h1>
+        <DoneRecipes />
       </div>
     </div>
   );

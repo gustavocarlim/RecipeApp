@@ -28,3 +28,15 @@ export type RecipesType = {
   meals: Meals[];
   drinks: Drinks[];
 };
+
+export type DoneRecipesType = {
+  id: string,
+  type: string,
+  nationality: string,
+  category: string,
+  alcoholicOrNot: string,
+  name: string,
+  image: string,
+  doneDate: string,
+  tags: string[],
+};

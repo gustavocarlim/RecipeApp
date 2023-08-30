@@ -21,7 +21,7 @@ function FavoriteRecipes() {
 
   const [favoriteRecipes, setFavoriteRecipes] = useState<Recipe[]>(storedFavorites);
   const [copiedRecipeId, setCopiedRecipeId] = useState<number | null>(null);
-  const [currentCategory, setcurrentCategory] = useState<string>('all');
+  const [currentCategory, setcurrentCategory] = useState<Recipe[] | string>('all');
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>(favoriteRecipes);
 
   const handleFavoriteChange = (index: number) => {
@@ -56,7 +56,6 @@ function FavoriteRecipes() {
       setFilteredRecipes(filtered);
     }
   };
-  console.log(filteredRecipes);
 
   const path = (recipe: Recipe) => {
     if (recipe.type.includes('drink')) {
@@ -80,13 +79,13 @@ function FavoriteRecipes() {
           </button>
           <button
             data-testid="filter-by-meal-btn"
-            onClick={ () => { handleFilterChange('meals'); } }
+            onClick={ () => { handleFilterChange('meal'); } }
           >
             Meals
           </button>
           <button
             data-testid="filter-by-drink-btn"
-            onClick={ () => { handleFilterChange('drinks'); } }
+            onClick={ () => { handleFilterChange('drink'); } }
           >
             Drinks
           </button>

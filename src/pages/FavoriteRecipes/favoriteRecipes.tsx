@@ -4,6 +4,7 @@ import Footer from '../../Components/Footer';
 import Header from '../../Components/Header';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import shareIcon from '../../images/shareIcon.svg';
+import './style.css';
 
 interface Recipe {
   id: number;
@@ -51,16 +52,13 @@ function FavoriteRecipes() {
     if (category === 'all') {
       setFilteredRecipes(favoriteRecipes);
     } else {
-      const filtered = favoriteRecipes
-        .filter((recipe) => recipe.category === category
-        && window.location.pathname.includes(`/${category}`));
+      const filtered = favoriteRecipes.filter((recipe) => recipe.type.includes(category));
       setFilteredRecipes(filtered);
     }
   };
+  console.log(filteredRecipes);
 
   const path = (recipe: Recipe) => {
-    console.log(recipe);
-
     if (recipe.type.includes('drink')) {
       return 'drinks';
     } if (recipe.type.includes('meal')) {
@@ -97,6 +95,7 @@ function FavoriteRecipes() {
               <div key={ recipe.id }>
                 <Link to={ `/${path(recipe)}/${recipe.id}` }>
                   <img
+                    className="foodImg"
                     src={ recipe.image }
                     alt={ recipe.name }
                     data-testid={ `${index}-horizontal-image` }

@@ -16,6 +16,7 @@ export type Meals = {
   idMeal: string;
   strMeal: string;
   strMealThumb: string;
+  strCategory: string;
 };
 
 export type Drinks = {
@@ -44,7 +45,7 @@ export type DoneRecipesType = {
 export type MealType = {
   'idMeal': string;
   'strMeal':string;
-  'strCategory': string;
+  strCategory: CategoryType;
   'strArea': string;
   'strInstructions': string;
   'strMealThumb': string;
@@ -128,4 +129,8 @@ export type DrinkType = {
   'strMeasure15':string;
   'strCreativeCommonsConfirmed':string;
   'dateModified':string;
+};
+
+export type CategoryType = {
+  strCategory: string;
 };

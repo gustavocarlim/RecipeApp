@@ -1,8 +1,9 @@
+// Por exemplo, em fetchIngredients:
 export const fetchIngredients = async (ingredient: string) => {
   const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
   const data = await response.json();
 
-  if (!data.meals || data.meals.length === 0) {
+  if (!data || !data.meals || data.meals.length === 0) {
     window.alert('No recipes found for this ingredient.');
   }
 

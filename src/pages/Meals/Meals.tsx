@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../../Components/Header';
+/* import Header from '../../Components/Header'; */
 import SearchBar from '../../Components/SearchBar';
 import Footer from '../../Components/Footer';
 import RecipeCard from '../../Components/RecipeCard';
@@ -8,6 +8,7 @@ import RecipesContext from '../../context/RecipesContext';
 import { fetchName,
   fetchfirstLetter,
   fetchIngredients } from '../../Components/services/Api';
+import Header from '../../Components/Header';
 
 interface Recipe {
   id: string;

@@ -1,4 +1,4 @@
-import DoneRecipes from '../../Components/DoneRecipes';
+import DoneRecipes from '../../Components/DoneRecipesCard';
 
 function DoneRecipies() {
   return (

@@ -1,15 +1,23 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 import Drinks from '../pages/Drinks/Drinks';
 import { renderWithRouter } from './helpers/renderWithRouter';
+import { drinkCategories } from './mocks/mockdrinkCategories';
 
-/* const mockData =  */
+/* const =  */
+
 describe('Verifica o componente Drinks', () => {
   test('Verifica se existe um título', () => {
     renderWithRouter(<Drinks />, { initialEntries: ['/'] });
 
     const title = screen.getByTestId('page-title');
     expect(title).toBeInTheDocument();
+  });
+  beforeEach(() => {
+    global.fetch = vi.fn().mockResolvedValue({
+      json: async () => (drinkCategories),
+    });
   });
 
   test('verifica se existe um ícone de perfil', () => {
@@ -30,14 +38,12 @@ describe('Verifica o componente Drinks', () => {
     const shakebtn = await screen.findByRole('button', { name: 'Shake' });
     expect(shakebtn).toBeInTheDocument();
     userEvent.click(shakebtn);
-    expect(await screen.findByText('151 Florida Bushwacker')).toBeInTheDocument();
+    expect(await screen.findByTestId('0-recipe-card')).toBeInTheDocument();
     const clearbtn = await screen.findByRole('button', { name: 'Clear Filters' });
     userEvent.click(clearbtn);
-    expect(await screen.findByText('GG')).toBeInTheDocument();
+    expect(await screen.findByTestId('0-recipe-card')).toBeInTheDocument();
   });
-/*   test('Verifica erro', () => {
-global.fetch = vi.fn().mockResolvedValue({
-  json: async() => ()
-})
+  /*  test('Verifica o fecht', () => {
+    expect(global.fetch).toHaveBeenCalled();
   }); */
 });

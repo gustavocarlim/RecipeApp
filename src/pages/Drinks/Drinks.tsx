@@ -68,7 +68,7 @@ function Drinks() {
     fetchDrinks();
     fetchDrinksByCategory(selectedCategory || '');
 
-    if (filter.type === 'name') {
+    if (filter?.type === 'name') {
       fetchNameBebida(filter.value).then((data) => {
         const drinkData = data.drinks.map((drink: any) => ({
           id: drink.idDrink,
@@ -82,7 +82,7 @@ function Drinks() {
           setDrinks(drinkData);
         }
       });
-    } else if (filter.type === 'firstletter') {
+    } else if (filter?.type === 'firstletter') {
       fetchfirstLetterBebida(filter.value).then((data) => {
         const drinkData = data.drinks.map((drink: any) => ({
           id: drink.idDrink,
@@ -91,7 +91,7 @@ function Drinks() {
         }));
         setDrinks(drinkData);
       });
-    } else if (filter.type === 'ingredientes') {
+    } else if (filter?.type === 'ingredientes') {
       fetchIngredientsBebida(filter.value).then((data) => {
         const drinkData = data.drinks.map((drink: any) => ({
           id: drink.idDrink,
@@ -155,4 +155,3 @@ function Drinks() {
   );
 }
 export default Drinks;
-// ;

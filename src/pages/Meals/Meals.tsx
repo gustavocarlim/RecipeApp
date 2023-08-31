@@ -31,8 +31,6 @@ function Meals() {
     }
     const response = await fetch(url);
     const data = await response.json();
-    // O erro é em data.meals, pois está retornando undefined
-    console.log(data.meals);
     if (data && data.meals) {
       const categoryData = data.meals.map((category: any) => category.strCategory);
       setCategories(categoryData.slice(0, 5));

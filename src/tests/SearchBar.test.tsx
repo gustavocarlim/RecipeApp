@@ -57,7 +57,7 @@ describe('Testa o SearchBar com busca pela primeira letra', () => {
     vi.clearAllMocks();
   });
   beforeEach(async () => {
-    global.fetch = vi.fn().mockImplementation(mockMealsFetch as any);
+    global.fetch = mockMealsFetch;
     window.alert = vi.fn(() => {});
   });
 

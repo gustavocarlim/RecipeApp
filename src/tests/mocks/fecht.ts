@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import mealCategories from './ mealCategories';
 import beefMeals from './beefMeals ';
 import breakfastMeals from './breakfastMeals';
@@ -8,6 +9,7 @@ import dessertMeals from './dessertMeals';
 import drinksByFirstLetter from './drinksByFirstLetter';
 import drinksList from './drinksList';
 import gg from './gg';
+import appleFran from './appleFran';
 import ginDrinks from './ginDrinks';
 import goatMeals from './goatMeals ';
 import mealsByFirstLetter from './mealsByFirstLetter';
@@ -25,8 +27,8 @@ export const mockMealsFetch = (url: any) => Promise.resolve({
   ok: true,
   json: () => {
     if (url === 'https://www.themealdb.com/api/json/v1/1/list.php?c=list') {
-      console.log('entrouuu')
-       return Promise.resolve(mealCategories); }
+      return Promise.resolve(mealCategories);
+    }
 
     if (url === 'https://www.themealdb.com/api/json/v1/1/search.php?s=') { return Promise.resolve(mealsList); }
     if (url === 'https://www.themealdb.com/api/json/v1/1/filter.php?i=Chicken') return Promise.resolve(mealsByIngredient);
@@ -37,6 +39,8 @@ export const mockMealsFetch = (url: any) => Promise.resolve({
     if (url === 'https://www.themealdb.com/api/json/v1/1/search.php?f=C') return Promise.resolve(mealsByFirstLetter);
     if (url === 'https://www.themealdb.com/api/json/v1/1/search.php?s=chicken') return Promise.resolve(mealsByName);
     if (url === 'https://www.themealdb.com/api/json/v1/1/filter.php?c=Chicken') return Promise.resolve(chickenMeals);
+    if (url === 'https://www.themealdb.com/api/json/v1/1/filter.php?c=null') return Promise.resolve(chickenMeals);
+    if (url === 'https://www.themealdb.com/api/json/v1/1/search.php?f=a') return Promise.resolve(appleFran);
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list') { return Promise.resolve(drinkCategories); }
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=') { return Promise.resolve(drinksList); }
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary Drink') return Promise.resolve(ordinaryDrinks);
@@ -48,10 +52,12 @@ export const mockMealsFetch = (url: any) => Promise.resolve({
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=15997') return Promise.resolve(oneDrinkId15997);
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=A') return Promise.resolve(drinksByFirstLetter);
     if (url === 'https://www.themealdb.com/api/json/v1/1/search.php?s=') { return Promise.resolve(mealsList); }
-  
+
     if (url === 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52977') return Promise.resolve(corba);
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=15997') return Promise.resolve(gg);
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=') return Promise.resolve(drinksList);
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list') return Promise.resolve(drinkCategories);
+
+    return console.log(url);
   },
 });

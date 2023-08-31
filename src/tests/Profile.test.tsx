@@ -1,12 +1,21 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter, MemoryRouter } from 'react-router-dom';
+import { vi } from 'vitest';
 import Profile from '../pages/Profile/Profile';
 import { renderWithRouter } from './helpers/renderWithRouter';
 import Login from '../pages/Login/Login';
+import { mockMealsFetch } from './mocks/fecht';
 
 // moka email
 describe('Verifica o componente Profile', () => {
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+  beforeEach(async () => {
+    global.fetch = vi.fn().mockImplementation(mockMealsFetch as any);
+    window.alert = vi.fn(() => {});
+  });
   test('Verifica se existe um título', () => {
     renderWithRouter(<Profile />, { initialEntries: ['/'] });
     const title = screen.getByTestId('page-title');

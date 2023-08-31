@@ -1,11 +1,13 @@
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event/';
+/* import userEvent from '@testing-library/user-event/'; */
 import { vi } from 'vitest';
 import SearchBar from '../Components/SearchBar';
 import RecipiesProvider from '../context/RecipiesProvider';
 import App from '../App';
 import { renderWithRouter } from './helpers/renderWithRouter';
+import { mockMealsFetch } from './mocks/fecht';
 
 const INGREDIENT_SEARCH_RADIO = 'ingredient-search-radio';
 const FIRST_LETTER_SEARCH_RADIO = 'first-letter-search-radio';
@@ -48,7 +50,20 @@ const SEARCH_ICON = 'search-top-btn';
 const SEARCH_INPUT = 'search-input';
 
 describe('Testa o SearchBar com busca pela primeira letra', () => {
-  beforeEach(() => {
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+  beforeEach(async () => {
+    global.fetch = vi.fn().mockImplementation(mockMealsFetch as any);
+    window.alert = vi.fn(() => {});
+  });
+  /* beforeEach(() => {
+    vi.spyOn(global, 'fetch').mockResolvedValue({
+      json: async () => (fetch),
+    });
+  });
+   */
+  /*   beforeEach(() => {
     global.fetch = vi.fn().mockResolvedValue({
       json: async () => (filterByFirstLetterMock),
     });
@@ -57,7 +72,8 @@ describe('Testa o SearchBar com busca pela primeira letra', () => {
   afterEach(() => {
     vi.clearAllMocks();
     localStorage.clear();
-  });
+  }); */
+
   test('Testa a pesquisa pela primeira letra', async () => {
     renderWithRouter(
       <RecipiesProvider>

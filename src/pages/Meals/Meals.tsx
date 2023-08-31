@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-/* import Header from '../../Components/Header'; */
 import SearchBar from '../../Components/SearchBar';
 import Footer from '../../Components/Footer';
 import RecipeCard from '../../Components/RecipeCard';

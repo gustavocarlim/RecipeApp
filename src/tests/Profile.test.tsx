@@ -5,6 +5,7 @@ import Profile from '../pages/Profile/Profile';
 import { renderWithRouter } from './helpers/renderWithRouter';
 import Login from '../pages/Login/Login';
 
+// moka email
 describe('Verifica o componente Profile', () => {
   test('Verifica se existe um título', () => {
     renderWithRouter(<Profile />, { initialEntries: ['/'] });

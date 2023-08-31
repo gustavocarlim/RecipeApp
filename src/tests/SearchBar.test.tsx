@@ -14,6 +14,9 @@ const FIRST_LETTER_SEARCH_RADIO = 'first-letter-search-radio';
 const EXEC_SEARCH_BTN = 'exec-search-btn';
 
 test('Testa a renderização e funcionamento do componente SearchBar', () => {
+  global.fetch = vi.fn().mockImplementation(mockMealsFetch as any);
+  window.alert = vi.fn(() => {});
+
   const { getByTestId } = render(<SearchBar />);
 
   // Verifique se os elementos de rádio estão presentes
@@ -57,12 +60,7 @@ describe('Testa o SearchBar com busca pela primeira letra', () => {
     global.fetch = vi.fn().mockImplementation(mockMealsFetch as any);
     window.alert = vi.fn(() => {});
   });
-  /* beforeEach(() => {
-    vi.spyOn(global, 'fetch').mockResolvedValue({
-      json: async () => (fetch),
-    });
-  });
-   */
+
   /*   beforeEach(() => {
     global.fetch = vi.fn().mockResolvedValue({
       json: async () => (filterByFirstLetterMock),
@@ -74,7 +72,7 @@ describe('Testa o SearchBar com busca pela primeira letra', () => {
     localStorage.clear();
   }); */
 
-  test('Testa a pesquisa pela primeira letra', async () => {
+  test.only('Testa a pesquisa pela primeira letra', async () => {
     renderWithRouter(
       <RecipiesProvider>
         <App />

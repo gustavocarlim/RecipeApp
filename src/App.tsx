@@ -13,23 +13,23 @@ import RecipiesProvider from './context/RecipiesProvider';
 
 function App() {
   return (
+
     <RecipiesProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={ <Login /> } />
-          <Route path="/meals" element={ <Meals /> } />
-          <Route path="/drinks" element={ <Drinks /> } />
-          <Route path="/profile" element={ <Profile /> } />
-          <Route path="/done-recipes" element={ <DoneRecipes /> } />
-          <Route path="/favorite-recipes" element={ <FavoriteRecipes /> } />
-          {/* <Route path="/meals/:id/:in" element={ <RecipeInProgress
+      <Routes>
+        <Route path="/" element={ <Login /> } />
+        <Route path="/meals" element={ <Meals /> } />
+        <Route path="/drinks" element={ <Drinks /> } />
+        <Route path="/profile" element={ <Profile /> } />
+        <Route path="/done-recipes" element={ <DoneRecipes /> } />
+        <Route path="/favorite-recipes" element={ <FavoriteRecipes /> } />
+        {/* <Route path="/meals/:id/:in" element={ <RecipeInProgress
            type="Meal" /> } />
           <Route path="/drinks/:id/:in" element={
              <RecipeInProgress type="Drink" /> } /> */}
-          <Route path="/meals/:id" element={ <RecipeDetails isDrinks={ false } /> } />
-          <Route path="/drinks/:id" element={ <RecipeDetails isDrinks /> } />
-        </Routes>
-      </BrowserRouter>
+        <Route path="/meals/:id" element={ <RecipeDetails isDrinks={ false } /> } />
+        <Route path="/drinks/:id" element={ <RecipeDetails isDrinks /> } />
+      </Routes>
+
     </RecipiesProvider>
   );
 }

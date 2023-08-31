@@ -17,7 +17,7 @@ interface Recipe {
 function Meals() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState([]);  //tem que vir um valor correto, não pode ser string=--- test meals--- ele quebra o teste e não carrega o restante de ttdos requisitos
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { filter } = useContext(RecipesContext);
   const navigate = useNavigate();
@@ -35,6 +35,7 @@ function Meals() {
     }
   };
   const fetchRecipesByCategory = async (category: string) => {
+    console.log('oii', category);
     try {
       setIsLoading(true);
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);

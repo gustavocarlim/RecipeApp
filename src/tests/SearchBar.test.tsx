@@ -91,6 +91,6 @@ describe('Testa o SearchBar com busca pela primeira letra', () => {
     await userEvent.click(firstLetterRadio);
     await userEvent.click(buttonSearch);
 
-    await screen.findByText('Apam balik');
+    await screen.findByText('Apple Frangipan Tart');
   });
 });

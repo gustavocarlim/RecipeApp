@@ -5,7 +5,7 @@ interface RecipeDetailsProps {
   isDrinks: boolean;
 }
 
-interface Recipe {
+export interface Recipe {
   id: string;
   name: string;
   imageUrl: string;

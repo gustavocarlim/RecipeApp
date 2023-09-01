@@ -1,37 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import Header from '../../Components/Header';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import SearchBar from '../../Components/SearchBar';
 import Footer from '../../Components/Footer';
 import RecipeCard from '../../Components/RecipeCard';
+import RecipesContext from '../../context/RecipesContext';
+import { fetchName,
+  fetchfirstLetter,
+  fetchIngredients } from '../../Components/services/Api';
+import Header from '../../Components/Header';
+import { CategoryType, MealType } from '../../types';
 
 interface Recipe {
   id: string;
   imageUrl: string;
   name: string;
+  strCategory: string;
 }
-
 function Meals() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { filter } = useContext(RecipesContext);
+  const navigate = useNavigate();
 
   const fetchCategories = async () => {
     let url = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
-
     if (selectedCategory) {
       url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
     }
-
     const response = await fetch(url);
     const data = await response.json();
-
-    if (data.meals) {
+    if (data && data.meals) {
       const categoryData = data.meals.map((category: any) => category.strCategory);
       setCategories(categoryData.slice(0, 5));
+      if (selectedCategory === null) {
+        setSelectedCategory(categoryData[0]);
+      }
     }
   };
-
-  const fetchRecipesByCategory = async (category: string) => {
+  const fetchRecipesByCategory = async (category: CategoryType) => {
+    // console.log('oii', category);
     try {
       setIsLoading(true);
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
@@ -39,10 +48,13 @@ function Meals() {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      const recipeData = data.meals.map((meal: any) => ({
+      // const { meals } = data;
+      // console.log(meals);
+      const recipeData = data.meals.map((meal: MealType) => ({
         id: meal.idMeal,
         imageUrl: meal.strMealThumb,
         name: meal.strMeal,
+        strCategory: meal.strCategory,
       }));
       setRecipes(recipeData);
     } catch (error) {
@@ -51,46 +63,82 @@ function Meals() {
       setIsLoading(false);
     }
   };
-
   const fetchRecipes = async () => {
     const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
     const data = await response.json();
-    const recipeData = data.meals.map((meal: any) => ({
+    // console.log(data);
+
+    const recipeData = data.meals.map((meal: MealType) => ({
       id: meal.idMeal,
       imageUrl: meal.strMealThumb,
       name: meal.strMeal,
+      strCategory: meal.strCategory,
     }));
     setRecipes(recipeData);
   };
 
   useEffect(() => {
     fetchCategories();
-    if (selectedCategory) {
-      fetchRecipesByCategory(selectedCategory);
-    } else {
-      fetchRecipes();
+    fetchRecipes();
+    fetchRecipesByCategory(selectedCategory as unknown as CategoryType);
+
+    if (filter.type === 'name') {
+      fetchName(filter.value).then((data) => {
+        const recipeData = data.meals.map((meal: any) => ({
+          id: meal.idMeal,
+          imageUrl: meal.strMealThumb,
+          name: meal.strMeal,
+          strCategory: meal.strCategory,
+        }));
+        if (recipeData.length === 1) {
+          const recipeId = recipeData[0].id;
+          navigate(`/meals/${recipeId}`);
+        } else {
+          setRecipes(recipeData);
+        }
+      });
+    } else if (filter.type === 'firstletter') {
+      fetchfirstLetter(filter.value).then((data) => {
+        const recipeData = data.meals.map((meal: any) => ({
+          id: meal.idMeal,
+          imageUrl: meal.strMealThumb,
+          name: meal.strMeal,
+          strCategory: meal.strCategory,
+        }));
+        setRecipes(recipeData);
+      });
+    } else if (filter.type === 'ingredientes') {
+      fetchIngredients(filter.value).then((data) => {
+        const recipeData = data.meals.map((meal: any) => ({
+          id: meal.idMeal,
+          imageUrl: meal.strMealThumb,
+          name: meal.strMeal,
+          strCategory: meal.strCategory,
+        }));
+        setRecipes(recipeData);
+      });
     }
-  }, [selectedCategory]);
+  }, [selectedCategory, filter]);
 
   const handleCategoryFilter = (category: string) => {
     if (category === selectedCategory) {
       setSelectedCategory(null);
     } else {
       setSelectedCategory(category);
-      fetchRecipesByCategory(category);
+      fetchRecipesByCategory(category as unknown as CategoryType);
     }
   };
-
   const handleClearFilters = () => {
     setSelectedCategory(null);
   };
-
   const recipesToRender = recipes.slice(0, 12);
 
   return (
     <>
       <div>
         <Header />
+        <h1 data-testid="page-title">Meals</h1>
+        <SearchBar />
         {categories.map((category, index) => (
           <button
             key={ index }
@@ -125,5 +173,4 @@ function Meals() {
     </>
   );
 }
-
 export default Meals;

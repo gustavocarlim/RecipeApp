@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../../Components/Header';
 import SearchBar from '../../Components/SearchBar';
 import Footer from '../../Components/Footer';
 import RecipeCard from '../../Components/RecipeCard';
@@ -8,11 +7,14 @@ import RecipesContext from '../../context/RecipesContext';
 import { fetchName,
   fetchfirstLetter,
   fetchIngredients } from '../../Components/services/Api';
+import Header from '../../Components/Header';
+import { CategoryType, MealType } from '../../types';
 
 interface Recipe {
   id: string;
   imageUrl: string;
   name: string;
+  strCategory: string;
 }
 function Meals() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -29,12 +31,16 @@ function Meals() {
     }
     const response = await fetch(url);
     const data = await response.json();
-    if (data.meals) {
+    if (data && data.meals) {
       const categoryData = data.meals.map((category: any) => category.strCategory);
       setCategories(categoryData.slice(0, 5));
+      if (selectedCategory === null) {
+        setSelectedCategory(categoryData[0]);
+      }
     }
   };
-  const fetchRecipesByCategory = async (category: string) => {
+  const fetchRecipesByCategory = async (category: CategoryType) => {
+    // console.log('oii', category);
     try {
       setIsLoading(true);
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
@@ -42,10 +48,13 @@ function Meals() {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      const recipeData = data.meals.map((meal: any) => ({
+      // const { meals } = data;
+      // console.log(meals);
+      const recipeData = data.meals.map((meal: MealType) => ({
         id: meal.idMeal,
         imageUrl: meal.strMealThumb,
         name: meal.strMeal,
+        strCategory: meal.strCategory,
       }));
       setRecipes(recipeData);
     } catch (error) {
@@ -57,10 +66,13 @@ function Meals() {
   const fetchRecipes = async () => {
     const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
     const data = await response.json();
-    const recipeData = data.meals.map((meal: any) => ({
+    // console.log(data);
+
+    const recipeData = data.meals.map((meal: MealType) => ({
       id: meal.idMeal,
       imageUrl: meal.strMealThumb,
       name: meal.strMeal,
+      strCategory: meal.strCategory,
     }));
     setRecipes(recipeData);
   };
@@ -68,7 +80,7 @@ function Meals() {
   useEffect(() => {
     fetchCategories();
     fetchRecipes();
-    fetchRecipesByCategory(selectedCategory || '');
+    fetchRecipesByCategory(selectedCategory as unknown as CategoryType);
 
     if (filter.type === 'name') {
       fetchName(filter.value).then((data) => {
@@ -76,6 +88,7 @@ function Meals() {
           id: meal.idMeal,
           imageUrl: meal.strMealThumb,
           name: meal.strMeal,
+          strCategory: meal.strCategory,
         }));
         if (recipeData.length === 1) {
           const recipeId = recipeData[0].id;
@@ -90,6 +103,7 @@ function Meals() {
           id: meal.idMeal,
           imageUrl: meal.strMealThumb,
           name: meal.strMeal,
+          strCategory: meal.strCategory,
         }));
         setRecipes(recipeData);
       });
@@ -99,6 +113,7 @@ function Meals() {
           id: meal.idMeal,
           imageUrl: meal.strMealThumb,
           name: meal.strMeal,
+          strCategory: meal.strCategory,
         }));
         setRecipes(recipeData);
       });
@@ -110,7 +125,7 @@ function Meals() {
       setSelectedCategory(null);
     } else {
       setSelectedCategory(category);
-      fetchRecipesByCategory(category);
+      fetchRecipesByCategory(category as unknown as CategoryType);
     }
   };
   const handleClearFilters = () => {

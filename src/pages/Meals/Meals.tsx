@@ -8,6 +8,7 @@ import RecipesContext from '../../context/RecipesContext';
 import { fetchName,
   fetchfirstLetter,
   fetchIngredients } from '../../Components/services/Api';
+import { Drinks } from '../../types';
 
 interface Recipe {
   id: string;
@@ -19,6 +20,7 @@ function Meals() {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [recommendedDrinks, setRecommendedDrinks] = useState<Drinks[]>([]);
   const { filter } = useContext(RecipesContext);
   const navigate = useNavigate();
 
@@ -32,6 +34,22 @@ function Meals() {
     if (data.meals) {
       const categoryData = data.meals.map((category: any) => category.strCategory);
       setCategories(categoryData.slice(0, 5));
+    }
+  };
+  const fetchRecommendedDrinks = async () => {
+    try {
+      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+      const data = await response.json();
+      console.log(data);
+      const drinkData = data.drinks.map((drink: any) => ({
+        id: drink.idDrink,
+        imageUrl: drink.strDrinkThumb,
+        name: drink.strDrink,
+      }));
+      console.log(drinkData);
+      setRecommendedDrinks(drinkData.slice(0, 6));
+    } catch (error) {
+      console.error('Error fetching recommended drinks:', error);
     }
   };
   const fetchRecipesByCategory = async (category: string) => {
@@ -69,6 +87,7 @@ function Meals() {
     fetchCategories();
     fetchRecipes();
     fetchRecipesByCategory(selectedCategory || '');
+    fetchRecommendedDrinks();
 
     if (filter.type === 'name') {
       fetchName(filter.value).then((data) => {

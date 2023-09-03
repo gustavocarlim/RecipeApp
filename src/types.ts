@@ -28,3 +28,30 @@ export type RecipesType = {
   meals: Meals[];
   drinks: Drinks[];
 };
+
+export interface RecipeDetailsProps {
+  isDrinks: boolean;
+}
+
+export interface Recipe {
+  id: string;
+  name: string;
+  imageUrl: string;
+  category: string;
+  alcoholic: string;
+  ingredients: Array<{ name: string; measure: string }>;
+  instructions: string;
+  videoUrl?: string;
+}
+
+export interface RecipeLocalStorage {
+  id: string;
+  name: string;
+  imageUrl: string;
+  category: string;
+  alcoholic: string;
+  ingredients: Array<{ name: string; measure: string }>;
+  instructions: string;
+  videoUrl?: string;
+  nationality: string;
+}

@@ -59,6 +59,7 @@ function Drinks() {
       imageUrl: drink.strDrinkThumb,
       name: drink.strDrink,
     }));
+    console.log(data);
     setDrinks(drinkData);
   };
   const fetchDrinksByCategory = async (category: string) => {
@@ -84,7 +85,7 @@ function Drinks() {
     fetchRecommendedMeals();
     fetchDrinksByCategory(selectedCategory || '');
 
-    if (filter.type === 'name') {
+    if (filter?.type === 'name') {
       fetchNameBebida(filter.value).then((data) => {
         const drinkData = data.drinks.map((drink: any) => ({
           id: drink.idDrink,
@@ -98,7 +99,7 @@ function Drinks() {
           setDrinks(drinkData);
         }
       });
-    } else if (filter.type === 'firstletter') {
+    } else if (filter?.type === 'firstletter') {
       fetchfirstLetterBebida(filter.value).then((data) => {
         const drinkData = data.drinks.map((drink: any) => ({
           id: drink.idDrink,
@@ -107,7 +108,7 @@ function Drinks() {
         }));
         setDrinks(drinkData);
       });
-    } else if (filter.type === 'ingredientes') {
+    } else if (filter?.type === 'ingredientes') {
       fetchIngredientsBebida(filter.value).then((data) => {
         const drinkData = data.drinks.map((drink: any) => ({
           id: drink.idDrink,
@@ -136,9 +137,11 @@ function Drinks() {
   return (
     <>
       <div>
+
         <Header />
         <SearchBar />
         <h1 data-testid="page-title">Drinks</h1>
+
         {categories.map((category, index) => (
           <button
             key={ index }
@@ -161,9 +164,11 @@ function Drinks() {
             isDrinks
           />
         ))}
+        <Footer />
       </div>
       <Footer />
     </>
+
   );
 }
 export default Drinks;

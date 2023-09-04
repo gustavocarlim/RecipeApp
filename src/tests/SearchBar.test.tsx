@@ -8,13 +8,13 @@ import RecipiesProvider from '../context/RecipiesProvider';
 import App from '../App';
 import { renderWithRouter } from './helpers/renderWithRouter';
 import { mockMealsFetch } from './mocks/fecht';
-import Drinks from '../pages/Drinks/Drinks';
 
 const INGREDIENT_SEARCH_RADIO = 'ingredient-search-radio';
 const FIRST_LETTER_SEARCH_RADIO = 'first-letter-search-radio';
 const EXEC_SEARCH_BTN = 'exec-search-btn';
 const INPUT_SEARCH = 'search-input';
 const SEARCH_ICON = 'search-top-btn';
+const LUPA = 'btnLupa';
 
 test('Testa a renderização e funcionamento do componente SearchBar', () => {
   global.fetch = vi.fn().mockImplementation(mockMealsFetch as any);
@@ -51,8 +51,8 @@ test('Testes do input radio Primeira letra', () => {
   // Simule o clique no botão de pesquisa
   fireEvent.click(getByTestId(EXEC_SEARCH_BTN));
 });
-
-test('Teste no filtro ingrediente', async () => {
+ */
+/* test('Teste no filtro ingrediente', async () => {
   const { getByTestId, findByTestId } = renderWithRouter(<SearchBar />, { initialEntries: ['/drinks'] });
   // Simule a seleção do filtro "Nome"
   fireEvent.click(getByTestId('ingredient-search-radio'));
@@ -63,8 +63,39 @@ test('Teste no filtro ingrediente', async () => {
   fireEvent.change(await findByTestId(INPUT_SEARCH), 'shake');
   // Simule o clique no botão de pesquisa
   fireEvent.click(getByTestId(EXEC_SEARCH_BTN));
+}); */
+
+test('Teste no filtro ingrediente', async () => {
+  renderWithRouter(<SearchBar />, { initialEntries: ['/drinks'] });
+  const inputIngrediente = screen.getByTestId('ingredient-search-radio');
+  expect(inputIngrediente).toBeInTheDocument();
+  fireEvent.click(inputIngrediente);
+  fireEvent.click(screen.getByTestId(EXEC_SEARCH_BTN));
+  await waitFor(() => {
+    expect(screen.getByTestId(EXEC_SEARCH_BTN)).toBeInTheDocument();
+  });
+  /*  const lupaBtn = screen.getByTestId(LUPA); */
+  /* fireEvent.click(lupaBtn);
+  const searchInput = screen.getByTestId(INPUT_SEARCH);
+  userEvent.type(searchInput, 'Milk');
 });
- */
+
+// tetse filtro name
+test('Teste no filtro ingrediente', async () => {
+  renderWithRouter(<SearchBar />, { initialEntries: ['/drinks'] });
+  const inputIngrediente = screen.getByTestId('ingredient-search-radio');
+  expect(inputIngrediente).toBeInTheDocument();
+  fireEvent.click(inputIngrediente);
+  /*  const lupaBtn = screen.getByTestId(LUPA); */
+  /* fireEvent.click(lupaBtn);
+  const searchInput = screen.getByTestId(INPUT_SEARCH);
+  userEvent.type(searchInput, 'Milk'); */
+  fireEvent.click(screen.getByTestId(EXEC_SEARCH_BTN));
+  await waitFor(() => {
+    expect(screen.getByTestId(EXEC_SEARCH_BTN)).toBeInTheDocument();
+  });
+});
+
 describe('Testa o SearchBar com busca pela primeira letra', () => {
   afterEach(() => {
     vi.clearAllMocks();
@@ -94,4 +125,3 @@ describe('Testa o SearchBar com busca pela primeira letra', () => {
     await screen.findByText('Apam balik');
   });
 });
-//

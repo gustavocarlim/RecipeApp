@@ -34,7 +34,7 @@ function Header() {
           data-testid="profile-top-btn"
         />
       </button>
-      <button onClick={ toggleSearch }>
+      <button data-testid="btnLupa" onClick={ toggleSearch }>
         <img
           src="src/images/searchIcon.svg"
           alt="Search"

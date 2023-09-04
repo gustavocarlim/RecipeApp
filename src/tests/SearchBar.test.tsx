@@ -23,7 +23,7 @@ test('Testa a renderização e funcionamento do componente SearchBar', () => {
   const { getByTestId } = render(<SearchBar />);
 
   // Verifique se os elementos de rádio estão presentes
-  /* expect(getByTestId('name-search-radio')).toBeInTheDocument(); */
+  expect(getByTestId('name-search-radio')).toBeInTheDocument();
   expect(getByTestId(INGREDIENT_SEARCH_RADIO)).toBeInTheDocument();
   expect(getByTestId(FIRST_LETTER_SEARCH_RADIO)).toBeInTheDocument();
   expect(getByTestId(EXEC_SEARCH_BTN)).toBeInTheDocument();
@@ -94,3 +94,4 @@ describe('Testa o SearchBar com busca pela primeira letra', () => {
     await screen.findByText('Apam balik');
   });
 });
+//

@@ -1,4 +1,4 @@
-import mealCategories from './ mealCategories';
+/* import mealCategories from './ mealCategories';
 import beefMeals from './beefMeals ';
 import breakfastMeals from './breakfastMeals';
 import chickenMeals from './chickenMeals';
@@ -51,3 +51,4 @@ export const mockMealsFetch = (url: any) => Promise.resolve({
     return console.log(url);
   },
 });
+ */

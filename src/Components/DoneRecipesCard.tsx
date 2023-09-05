@@ -5,7 +5,7 @@ import shareIcon from '../images/shareIcon.svg';
 import { DoneRecipesType } from '../types';
 import styles from '../style/doneRecipe.module.css';
 
-function DoneRecipe() {
+function DoneRecipesCard() {
   const [doneRecipes, setDoneRecipes] = useState<DoneRecipesType[]>([]);
   const [copiedLink, setClipboardText] = useState<string | undefined>();
   const [filter, setFilter] = useState<'all' | 'meal' | 'drink'>('all');
@@ -128,4 +128,4 @@ function DoneRecipe() {
   );
 }
 
-export default DoneRecipe;
+export default DoneRecipesCard;

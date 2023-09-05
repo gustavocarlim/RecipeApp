@@ -1,6 +1,6 @@
-import DoneRecipes from '../../Components/DoneRecipesCard';
+import DoneRecipesCard from '../../Components/DoneRecipesCard';
 
-function DoneRecipies() {
+function DoneRecipes() {
   return (
     <div>
       <div>
@@ -10,10 +10,10 @@ function DoneRecipies() {
           data-testid="profile-top-btn"
         />
         <h1 data-testid="page-title">Done Recipes</h1>
-        <DoneRecipes />
+        <DoneRecipesCard />
       </div>
     </div>
   );
 }
 
-export default DoneRecipies;
+export default DoneRecipes;

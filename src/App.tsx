@@ -1,20 +1,20 @@
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login/Login';
 import Meals from './pages/Meals/Meals';
 import Drinks from './pages/Drinks/Drinks';
 import Profile from './pages/Profile/Profile';
-import DoneRecipes from './pages/DoneRecipe/DoneRecipes';
+import DoneRecipes from './pages/DoneRecipes/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes/favoriteRecipes';
 import RecipeDetails from './Components/RecipeDetails';
-import RecipiesProvider from './context/RecipiesProvider';
+import RecipesProvider from './context/RecipiesProvider';
 /* import RecipeInProgress from './Components/services/RecipeInProgress'; */
 
 function App() {
   return (
 
-    <RecipiesProvider>
+    <RecipesProvider>
       <Routes>
         <Route path="/" element={ <Login /> } />
         <Route path="/meals" element={ <Meals /> } />
@@ -30,7 +30,7 @@ function App() {
         <Route path="/drinks/:id" element={ <RecipeDetails isDrinks /> } />
       </Routes>
 
-    </RecipiesProvider>
+    </RecipesProvider>
   );
 }
 

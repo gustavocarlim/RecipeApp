@@ -61,6 +61,7 @@ const appleFran = {
       strDrinkAlternate: null,
       strCategory: 'Dessert',
       strArea: 'British',
+
       strInstructions:
       'Heat oven to 190C/170C fan/gas 5. Tip the flour and sugar into a large bowl.'
       + 'Add the butter, then rub into the flour using your fingertips to make a light'
@@ -74,6 +75,9 @@ const appleFran = {
       + 'continue cooking in the warmth of the pan. To serve, spoon the warm fruit into'
       + 'an ovenproof gratin dish, top with the crumble mix, then reheat in the oven'
       + 'for 5-10 mins. Serve with vanilla ice cream.',
+
+      strInstructions: 'Heat oven to 190C/170C fan/gas 5.',
+
       strMealThumb: 'https://www.themealdb.com/images/media/meals/xvsurr1511719182.jpg',
       strTags: 'Pudding',
       strYoutube: 'https://www.youtube.com/watch?v=4vhcOwVBDO4',
@@ -128,14 +132,7 @@ const appleFran = {
       strDrinkAlternate: null,
       strCategory: 'Dessert',
       strArea: 'Malaysian',
-      strInstructions:
-      'Mix milk, oil and egg together. Sift flour, baking powder and salt into the'
-      + 'mixture. Stir well until all ingredients are combined evenly. Spread some'
-      + 'batter onto the pan. Spread a thin layer of batter to the side of the pan.'
-      + 'Cover the pan for 30-60 seconds until small air bubbles appear. Add butter,'
-      + 'cream corn, crushed peanuts and sugar onto the pancake. Fold the pancake into'
-      + 'half once the bottom surface is browned. Cut into wedges and best eaten when'
-      + 'it is warm.',
+
       strMealThumb: 'https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg',
       strTags: null,
       strYoutube: 'https://www.youtube.com/watch?v=6R8ffRRJcrg',
@@ -179,24 +176,6 @@ const appleFran = {
       strDrinkAlternate: null,
       strCategory: 'Chicken',
       strArea: 'Malaysian',
-      strInstructions:
-      'In a blender, add the ingredients for the spice paste and blend until smooth.'
-      + 'Over medium heat, pour the spice paste in a skillet or pan and fry for 10'
-      + 'minutes until fragrant. Add water or oil 1 tablespoon at a time if the paste'
-      + "becomes too dry. Don't burn the paste. Lower the fire slightly if needed. Add"
-      + 'the cloves, cardamom, tamarind pulp, coconut milk, water, sugar and salt. Turn'
-      + 'the heat up and bring the mixture to boil. Turn the heat to medium low and'
-      + 'simmer for 10 minutes. Stir occasionally. It will reduce slightly. This is the'
-      + "marinade/sauce, so taste and adjust seasoning if necessary. Don't worry if it's"
-      + 'slightly bitter. It will go away when roasting. When the marinade/sauce has'
-      + 'cooled, pour everything over the chicken and marinate overnight to two days.'
-      + 'Preheat the oven to 425 F. Remove the chicken from the marinade. Spoon the'
-      + 'marinade onto a greased (or aluminum lined) baking sheet. Lay the chicken on top'
-      + "of the sauce (make sure the chicken covers the sauce and the sauce isn't exposed"
-      + "or it'll burn) and spread the remaining marinade on the chicken. Roast for"
-      + '35-45 minutes or until internal temp of the thickest part of chicken is at least'
-      + '175 F. Let chicken rest for 5 minutes. Brush the chicken with some of the oil.'
-      + 'Serve chicken with the sauce over steamed rice (or coconut rice).',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/020z181619788503.jpg',
       strTags: null,
       strYoutube: 'https://www.youtube.com/watch?v=9ytR28QK6I8',

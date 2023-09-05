@@ -1,12 +1,18 @@
 export const filterByFirstLetterMock = {
+
   refeições: [
+
+
+
     {
       idMeal: '52768',
       strMeal: 'Torta de Frangipan de Maçã',
       strDrinkAlternate: null,
-      strCategoria: 'Sobremesa',
+
+      strCategory: 'Sobremesa',
       strArea: 'Britânico',
-      strInstruções: 'Pré-aqueça o forno a 200C/180C Ventilador/Gás 6....',
+      strInstructions: 'Pré-aqueça o forno a 200C/180C Ventilador/Gás 6....',
+
       strMealThumb: 'https://www.themealdb.com/images/media/meals/wxywrq1468235067.jpg',
       strTags: 'Torta, Assado, Frutado',
       strYoutube: 'https://www.youtube.com/watch?v=rp8Slv4INLk',
@@ -223,6 +229,7 @@ export const filterByFirstLetterMock = {
   ],
 };
 
+
 export const drinkByFirstLetter = {
   bebidas: [
     {
@@ -233,3 +240,6 @@ export const drinkByFirstLetter = {
       idBebida: '14888',
       strDrink: 'Zinger',
     }] };
+
+// exportar  const  drinkByFirstLetter  =  {
+//   

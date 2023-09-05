@@ -23,7 +23,6 @@ import ordinaryDrinks from './ordinaryDrinks';
 export const mockMealsFetch = (url: string) => Promise.resolve({
   ok: true,
   json: () => {
-
     if (url === 'https://www.themealdb.com/api/json/v1/1/list.php?c=list') return Promise.resolve(mealCategories);
     if (url === 'https://www.themealdb.com/api/json/v1/1/search.php?s=') return Promise.resolve(mealsList);
     if (url === 'https://www.themealdb.com/api/json/v1/1/filter.php?i=Chicken') return Promise.resolve(mealsByIngredient);
@@ -46,7 +45,6 @@ export const mockMealsFetch = (url: string) => Promise.resolve({
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=A') return Promise.resolve(drinksByFirstLetter);
     /*   if (url === 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52977') return Promise.resolve(corba);
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=15997') return Promise.resolve(gg); */
-
   },
 });
 //

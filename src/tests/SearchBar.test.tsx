@@ -132,11 +132,7 @@ test('Teste no filtro ingrediente', async () => {
     await userEvent.type(searchInput, 'a');
     await userEvent.click(firstLetterRadio);
     await userEvent.click(buttonSearch);
-   
-   
-   
-   
+
     await screen.findByText('Beef Banh Mi Bowls with Sriracha Mayo, Carrot & Pickled Cucumber');
   }); */
 /* }); */
-

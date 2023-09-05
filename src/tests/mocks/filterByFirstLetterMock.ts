@@ -2,8 +2,6 @@ export const filterByFirstLetterMock = {
 
   refeições: [
 
-
-
     {
       idMeal: '52768',
       strMeal: 'Torta de Frangipan de Maçã',

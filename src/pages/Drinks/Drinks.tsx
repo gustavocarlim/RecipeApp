@@ -164,7 +164,6 @@ function Drinks() {
             isDrinks
           />
         ))}
-        <Footer />
       </div>
       <Footer />
     </>

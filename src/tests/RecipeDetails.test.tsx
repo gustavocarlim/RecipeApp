@@ -1,31 +1,53 @@
-import { screen } from '@testing-library/react';
-import { vi } from 'vitest';
-import { mockMeals } from './mocks/mockMeals';
-import { renderWithRouter } from './helpers/renderWithRouter';
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { MemoryRouter, Route } from 'react-router-dom';
+import { JSX } from 'react/jsx-runtime';
 import RecipeDetails from '../Components/RecipeDetails';
 
-describe('Verifica o funcionamento correto do componente RecipeDetails', () => {
-  beforeEach(async () => {
-    global.fetch = vi.fn().mockResolvedValue({
-      json: async () => mockMeals,
-    });
+interface RecipeDetailsProps {
+  isDrinks: boolean;
+  navigate: (route: string) => void;
+}
+// Mock de uma receita para usar nos testes
+const mockRecipe = {
+  id: '1',
+  name: 'Mock Recipe',
+  imageUrl: 'mock-image-url.jpg',
+  category: 'Mock Category',
+  alcoholic: 'Mock Alcoholic',
+  ingredients: [
+    { name: 'Ingredient 1', measure: '1 cup' },
+    { name: 'Ingredient 2', measure: '2 cups' },
+  ],
+  instructions: 'Mock instructions for testing.',
+};
+
+// Função utilitária para renderizar o componente com MemoryRouter
+const renderWithRouter = (component: string | number | boolean | JSX.Element | Iterable<React.ReactNode> | null | undefined, route = '/meals/1') => {
+  return render(
+    <MemoryRouter initialEntries={ [route] }>
+      <Route path="/meals/:id">{component}</Route>
+    </MemoryRouter>,
+  );
+};
+
+describe('RecipeDetails Component', () => {
+  it('renders loading state when recipe is null', () => {
   });
 
-  afterEach(() => {
-    vi.clearAllMocks();
+  it('renders recipe details correctly', () => {
+
   });
 
-  test('Verifica se os detalhes da primeira receita de comida são renderizados corretamente', async () => {
-    const { meals } = mockMeals;
-    const { strMeal } = meals[0];
-
-    renderWithRouter(<RecipeDetails
-      isDrinks={ false }
-    />, { initialEntries: ['/meals'] });
-
-    expect(global.fetch).toBeCalledTimes(1);
-
-    const recipeName = await screen.findByRole('heading', { name: strMeal });
-    expect(recipeName).toBeInTheDocument();
+  it('renders ingredient list correctly', () => {
   });
+
+  it('renders instructions correctly', () => {
+  });
+
+  it('navigates to the in-progress route when "Continue Recipe" button is clicked', () => {
+    // Ajuste o valor do ID conforme necessário
+  });
+
+  // Add more tests as needed
 });

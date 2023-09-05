@@ -5,6 +5,7 @@ import Header from '../../Components/Header';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import shareIcon from '../../images/shareIcon.svg';
 import './style.css';
+import HeaderOffSearch from '../../Components/HeaderOffSearch';
 
 interface Recipe {
   id: number;
@@ -67,10 +68,10 @@ function FavoriteRecipes() {
 
   return (
     <>
-      <Header />
+      <HeaderOffSearch />
       <div>
         <div>
-          <h1 data-testid="page-title">Favorites</h1>
+          <h1 data-testid="page-title">Favorite  Recipes</h1>
           <button
             data-testid="filter-by-all-btn"
             onClick={ () => { handleFilterChange('all'); } }

@@ -2,8 +2,6 @@ export const filterByFirstLetterMock = {
 
   refeições: [
 
-
-
     {
       idMeal: '52768',
       strMeal: 'Torta de Frangipan de Maçã',
@@ -229,7 +227,6 @@ export const filterByFirstLetterMock = {
   ],
 };
 
-
 export const drinkByFirstLetter = {
   bebidas: [
     {
@@ -240,6 +237,3 @@ export const drinkByFirstLetter = {
       idBebida: '14888',
       strDrink: 'Zinger',
     }] };
-
-// exportar  const  drinkByFirstLetter  =  {
-//   

@@ -2,7 +2,7 @@ import mealCategories from './ mealCategories';
 import beefMeals from './beefMeals ';
 import breakfastMeals from './breakfastMeals';
 import chickenMeals from './chickenMeals';
-// import cocoaDrinks from './cocoaDrinks';
+import cocoaDrinks from './cocoaDrinks';
 import corba from './corba ';
 import dessertMeals from './dessertMeals';
 import drinksByFirstLetter from './drinksByFirstLetter';
@@ -17,15 +17,12 @@ import mealsByName from './mealsByName';
 import mealsList from './mealsList';
 import milkDrinks from './milkDrinks';
 import { drinkCategories } from './mockdrinkCategories';
-import cocktailDrinks from './ocktailDrinks';
 import oneDrinkId15997 from './ononeDrinkId15997';
 import ordinaryDrinks from './ordinaryDrinks';
-import otherDrinks from './otherDrinks';
 
 export const mockMealsFetch = (url: string) => Promise.resolve({
   ok: true,
   json: () => {
-
     if (url === 'https://www.themealdb.com/api/json/v1/1/list.php?c=list') return Promise.resolve(mealCategories);
     if (url === 'https://www.themealdb.com/api/json/v1/1/search.php?s=') return Promise.resolve(mealsList);
     if (url === 'https://www.themealdb.com/api/json/v1/1/filter.php?i=Chicken') return Promise.resolve(mealsByIngredient);
@@ -46,8 +43,8 @@ export const mockMealsFetch = (url: string) => Promise.resolve({
     /*   if (url === 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Other/Unknown') return Promise.resolve(otherDrinks); */
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=15997') return Promise.resolve(oneDrinkId15997);
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=A') return Promise.resolve(drinksByFirstLetter);
-  /*   if (url === 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52977') return Promise.resolve(corba);
+    /*   if (url === 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52977') return Promise.resolve(corba);
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=15997') return Promise.resolve(gg); */
-
   },
 });
+//

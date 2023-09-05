@@ -8,7 +8,6 @@ import RecipiesProvider from '../context/RecipiesProvider';
 import App from '../App';
 import { renderWithRouter } from './helpers/renderWithRouter';
 import { mockMealsFetch } from './mocks/fecht';
-import Header from '../Components/Header';
 import Drinks from '../pages/Drinks/Drinks';
 
 const INGREDIENT_SEARCH_RADIO = 'ingredient-search-radio';
@@ -16,7 +15,6 @@ const FIRST_LETTER_SEARCH_RADIO = 'first-letter-search-radio';
 const EXEC_SEARCH_BTN = 'exec-search-btn';
 const INPUT_SEARCH = 'search-input';
 const SEARCH_ICON = 'search-top-btn';
-const LUPA = 'btnLupa';
 const NAME_RADIO = 'name-search-radio';
 
 test('Testa a renderização e funcionamento do componente SearchBar', () => {
@@ -135,8 +133,6 @@ test('Teste no filtro ingrediente', async () => {
     await userEvent.click(firstLetterRadio);
     await userEvent.click(buttonSearch);
 
-
     await screen.findByText('Beef Banh Mi Bowls with Sriracha Mayo, Carrot & Pickled Cucumber');
   }); */
 /* }); */
-

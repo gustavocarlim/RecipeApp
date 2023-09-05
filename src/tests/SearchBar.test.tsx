@@ -125,4 +125,4 @@ describe('Testa o SearchBar com busca pela primeira letra', () => {
     await screen.findByText('Apam balik');
   });
 });
-//
+// oi

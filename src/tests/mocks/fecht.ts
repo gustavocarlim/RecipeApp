@@ -42,7 +42,7 @@ export const mockMealsFetch = (url: any) => Promise.resolve({
     /*   if (url === 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail') return Promise.resolve(cocktailDrinks); */
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Shake') return Promise.resolve(milkDrinks);
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=gin') return Promise.resolve(ginDrinks);
-  /*   if (url === 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Other/Unknown') return Promise.resolve(otherDrinks); */
+    /*   if (url === 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Other/Unknown') return Promise.resolve(otherDrinks); */
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=15997') return Promise.resolve(oneDrinkId15997);
     if (url === 'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=A') return Promise.resolve(drinksByFirstLetter);
   /*   if (url === 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=52977') return Promise.resolve(corba);

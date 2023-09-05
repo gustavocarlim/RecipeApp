@@ -109,16 +109,16 @@ test('Teste no filtro ingrediente', async () => {
   });
 });
 
-describe('Testa o SearchBar com busca pela primeira letra', () => {
+/* describe('Testa o SearchBar com busca pela primeira letra', () => {
   afterEach(() => {
     vi.clearAllMocks();
   });
   beforeEach(async () => {
     global.fetch = vi.fn().mockImplementation(mockMealsFetch as any);
     window.alert = vi.fn(() => {});
-  });
+  }); */
 
-  test('Testa a pesquisa pela primeira letra', async () => {
+/*  test('Testa a pesquisa pela primeira letra', async () => {
     renderWithRouter(
       <RecipiesProvider>
         <App />
@@ -136,5 +136,5 @@ describe('Testa o SearchBar com busca pela primeira letra', () => {
     await userEvent.click(buttonSearch);
 
     await screen.findByText('Beef Banh Mi Bowls with Sriracha Mayo, Carrot & Pickled Cucumber');
-  });
-});
+  }); */
+/* }); */

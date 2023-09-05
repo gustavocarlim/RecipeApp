@@ -1,14 +1,19 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
+import { vi } from 'vitest';
 import Login from '../App';
 import { renderWithRouter } from './helpers/renderWithRouter';
+import { mockMealsFetch } from './mocks/fecht';
 // import App from '../App';
 
 const email = 'email-input';
 const password = 'password-input';
 
 describe('Verifica o componente <Login />', () => {
+  global.fetch = vi.fn().mockImplementation(mockMealsFetch as any);
+  window.alert = vi.fn(() => {});
+
   test('Verifica se existe um campo email', () => {
     renderWithRouter(<Login />);
 

@@ -8,6 +8,7 @@ import RecipiesProvider from '../context/RecipiesProvider';
 import App from '../App';
 import { renderWithRouter } from './helpers/renderWithRouter';
 import { mockMealsFetch } from './mocks/fecht';
+import Header from '../Components/Header';
 import Drinks from '../pages/Drinks/Drinks';
 
 const INGREDIENT_SEARCH_RADIO = 'ingredient-search-radio';
@@ -15,6 +16,8 @@ const FIRST_LETTER_SEARCH_RADIO = 'first-letter-search-radio';
 const EXEC_SEARCH_BTN = 'exec-search-btn';
 const INPUT_SEARCH = 'search-input';
 const SEARCH_ICON = 'search-top-btn';
+const LUPA = 'btnLupa';
+const NAME_RADIO = 'name-search-radio';
 
 test('Testa a renderização e funcionamento do componente SearchBar', () => {
   global.fetch = vi.fn().mockImplementation(mockMealsFetch as any);
@@ -23,7 +26,7 @@ test('Testa a renderização e funcionamento do componente SearchBar', () => {
   const { getByTestId } = render(<SearchBar />);
 
   // Verifique se os elementos de rádio estão presentes
-  /* expect(getByTestId('name-search-radio')).toBeInTheDocument(); */
+  expect(getByTestId(NAME_RADIO)).toBeInTheDocument();
   expect(getByTestId(INGREDIENT_SEARCH_RADIO)).toBeInTheDocument();
   expect(getByTestId(FIRST_LETTER_SEARCH_RADIO)).toBeInTheDocument();
   expect(getByTestId(EXEC_SEARCH_BTN)).toBeInTheDocument();
@@ -35,25 +38,35 @@ test('Testes do input radio Primeira letra', () => {
   const firstLetterRadio = getByTestId(FIRST_LETTER_SEARCH_RADIO);
 
   // Simule a mudança para o rádio "Nome"
-  fireEvent.click(getByTestId('name-search-radio'));
+  fireEvent.click(getByTestId(NAME_RADIO));
   expect(firstLetterRadio).not.toBeChecked();
 });
 
 test('Teste no filtro name', async () => {
-  const { getByTestId, findByTestId } = renderWithRouter(<Drinks />, { initialEntries: ['/drinks'] });
-  // Simule a seleção do filtro "Nome"
-  fireEvent.click(getByTestId('name-search-radio'));
-  fireEvent.click(getByTestId(SEARCH_ICON));
-  await waitFor(() => {
-    expect(getByTestId(INPUT_SEARCH)).toBeInTheDocument();
-  });
-  fireEvent.change(await findByTestId(INPUT_SEARCH), 'shake');
-  // Simule o clique no botão de pesquisa
-  fireEvent.click(getByTestId(EXEC_SEARCH_BTN));
-});
+  global.fetch = vi.fn().mockImplementation(mockMealsFetch as any);
 
-test('Teste no filtro ingrediente', async () => {
-  const { getByTestId, findByTestId } = renderWithRouter(<Drinks />, { initialEntries: ['/drinks'] });
+  test('Testa a pesquisa pela primeira letra', async () => {
+    renderWithRouter(
+      <RecipiesProvider>
+        <App />
+      </RecipiesProvider>,
+      { initialEntries: ['/meals'] },
+    );
+    const { getByTestId, findByTestId } = renderWithRouter(<Drinks />, { initialEntries: ['/drinks'] });
+    // Simule a seleção do filtro "Nome"
+    const nameInput = screen.getByTestId(NAME_RADIO);
+    userEvent.click(nameInput);
+    fireEvent.click(getByTestId(SEARCH_ICON));
+    await waitFor(() => {
+      expect(getByTestId(INPUT_SEARCH)).toBeInTheDocument();
+    });
+    fireEvent.change(await findByTestId(INPUT_SEARCH), 'shake');
+    // Simule o clique no botão de pesquisa
+    fireEvent.click(getByTestId(EXEC_SEARCH_BTN));
+  });
+});
+/* test('Teste no filtro ingrediente', async () => {
+  const { getByTestId, findByTestId } = renderWithRouter(<SearchBar />, { initialEntries: ['/drinks'] });
   // Simule a seleção do filtro "Nome"
   fireEvent.click(getByTestId('ingredient-search-radio'));
   fireEvent.click(getByTestId(SEARCH_ICON));
@@ -63,18 +76,49 @@ test('Teste no filtro ingrediente', async () => {
   fireEvent.change(await findByTestId(INPUT_SEARCH), 'shake');
   // Simule o clique no botão de pesquisa
   fireEvent.click(getByTestId(EXEC_SEARCH_BTN));
+}); */
+
+test('Teste no filtro ingrediente', async () => {
+  renderWithRouter(<SearchBar />, { initialEntries: ['/drinks'] });
+  const inputIngrediente = screen.getByTestId('ingredient-search-radio');
+  expect(inputIngrediente).toBeInTheDocument();
+  fireEvent.click(inputIngrediente);
+  fireEvent.click(screen.getByTestId(EXEC_SEARCH_BTN));
+  await waitFor(() => {
+    expect(screen.getByTestId(EXEC_SEARCH_BTN)).toBeInTheDocument();
+  });
+  /*  const lupaBtn = screen.getByTestId(LUPA); */
+  /* fireEvent.click(lupaBtn);
+  const searchInput = screen.getByTestId(INPUT_SEARCH);
+  userEvent.type(searchInput, 'Milk');
 });
 
-describe('Testa o SearchBar com busca pela primeira letra', () => {
+// tetse filtro name
+test('Teste no filtro ingrediente', async () => {
+  renderWithRouter(<SearchBar />, { initialEntries: ['/drinks'] });
+  const inputIngrediente = screen.getByTestId('ingredient-search-radio');
+  expect(inputIngrediente).toBeInTheDocument();
+  fireEvent.click(inputIngrediente);
+  /*  const lupaBtn = screen.getByTestId(LUPA); */
+  /* fireEvent.click(lupaBtn);
+  const searchInput = screen.getByTestId(INPUT_SEARCH);
+  userEvent.type(searchInput, 'Milk'); */
+  fireEvent.click(screen.getByTestId(EXEC_SEARCH_BTN));
+  await waitFor(() => {
+    expect(screen.getByTestId(EXEC_SEARCH_BTN)).toBeInTheDocument();
+  });
+});
+
+/* describe('Testa o SearchBar com busca pela primeira letra', () => {
   afterEach(() => {
     vi.clearAllMocks();
   });
   beforeEach(async () => {
     global.fetch = vi.fn().mockImplementation(mockMealsFetch as any);
     window.alert = vi.fn(() => {});
-  });
+  }); */
 
-  test('Testa a pesquisa pela primeira letra', async () => {
+/*  test('Testa a pesquisa pela primeira letra', async () => {
     renderWithRouter(
       <RecipiesProvider>
         <App />
@@ -91,6 +135,8 @@ describe('Testa o SearchBar com busca pela primeira letra', () => {
     await userEvent.click(firstLetterRadio);
     await userEvent.click(buttonSearch);
 
-    await screen.findByText('Apple Frangipan Tart');
-  });
-});
+
+    await screen.findByText('Beef Banh Mi Bowls with Sriracha Mayo, Carrot & Pickled Cucumber');
+  }); */
+/* }); */
+

@@ -61,7 +61,23 @@ const appleFran = {
       strDrinkAlternate: null,
       strCategory: 'Dessert',
       strArea: 'British',
+
+      strInstructions:
+      'Heat oven to 190C/170C fan/gas 5. Tip the flour and sugar into a large bowl.'
+      + 'Add the butter, then rub into the flour using your fingertips to make a light'
+      + 'breadcrumb texture. Do not overwork it or the crumble will become heavy.'
+      + 'Sprinkle the mixture evenly over a baking sheet and bake for 15 mins or until'
+      + 'lightly coloured.Meanwhile, for the compote, peel, core and cut the apples into'
+      + '2cm dice. Put the butter and sugar in a medium saucepan and melt together over'
+      + 'a medium heat. Cook for 3 mins until the mixture turns to a light caramel. Stir'
+      + 'in the apples and cook for 3 mins. Add the blackberries and cinnamon, and cook'
+      + 'for 3 mins more. Cover, remove from the heat, then leave for 2-3 mins to'
+      + 'continue cooking in the warmth of the pan. To serve, spoon the warm fruit into'
+      + 'an ovenproof gratin dish, top with the crumble mix, then reheat in the oven'
+      + 'for 5-10 mins. Serve with vanilla ice cream.',
+
       strInstructions: 'Heat oven to 190C/170C fan/gas 5.',
+
       strMealThumb: 'https://www.themealdb.com/images/media/meals/xvsurr1511719182.jpg',
       strTags: 'Pudding',
       strYoutube: 'https://www.youtube.com/watch?v=4vhcOwVBDO4',
@@ -116,7 +132,7 @@ const appleFran = {
       strDrinkAlternate: null,
       strCategory: 'Dessert',
       strArea: 'Malaysian',
-      strInstructions: 'Mix milk, oil and egg together.',
+
       strMealThumb: 'https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg',
       strTags: null,
       strYoutube: 'https://www.youtube.com/watch?v=6R8ffRRJcrg',
@@ -149,17 +165,6 @@ const appleFran = {
       strMeasure7: '25g',
       strMeasure8: '45g',
       strMeasure9: '3 tbs',
-      strMeasure10: ' ',
-      strMeasure11: ' ',
-      strMeasure12: ' ',
-      strMeasure13: ' ',
-      strMeasure14: ' ',
-      strMeasure15: ' ',
-      strMeasure16: ' ',
-      strMeasure17: ' ',
-      strMeasure18: ' ',
-      strMeasure19: ' ',
-      strMeasure20: ' ',
       strSource: 'https://www.nyonyacooking.com/recipes/apam-balik~SJ5WuvsDf9WQ',
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
@@ -171,7 +176,6 @@ const appleFran = {
       strDrinkAlternate: null,
       strCategory: 'Chicken',
       strArea: 'Malaysian',
-      strInstructions: 'In a blender, add the ingredients for the',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/020z181619788503.jpg',
       strTags: null,
       strYoutube: 'https://www.youtube.com/watch?v=9ytR28QK6I8',
@@ -208,13 +212,6 @@ const appleFran = {
       strMeasure11: '1 can ',
       strMeasure12: '1 tsp ',
       strMeasure13: '1 cup ',
-      strMeasure14: ' ',
-      strMeasure15: ' ',
-      strMeasure16: ' ',
-      strMeasure17: ' ',
-      strMeasure18: ' ',
-      strMeasure19: ' ',
-      strMeasure20: ' ',
       strSource: 'http://www.curiousnut.com/roasted-spiced-chicken-ayam-percik/',
       strImageSource: null,
       strCreativeCommonsConfirmed: null,
